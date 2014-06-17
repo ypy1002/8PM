@@ -3,6 +3,30 @@ var chatStatus = 0;
 var socket = io.connect('http://localhost:4000');
 var blindHeight = 12.8;
 var blindPhoto = 12.8;
+
+//toast 2014.06.17
+var toast = function(msg){
+	   $("<div><div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h4><span class='glyphicon glyphicon-heart'></span>&nbsp"+msg+"</h4></div></div> ")
+	   .css({ display: "block", 
+	      opacity: 0.90, 
+	      position: "fixed",
+	      "text-align": "center",
+	      border: "1px solid #FFC091",
+	      width: "70%",
+	      height: "6%",
+	      color: "white",
+	      "background-color": "#FFC091",
+	      "border-radius": "5px",
+	      
+	       left: $(window).width()/6,
+	       top: $(window).height()/2 })
+	      
+	   .appendTo( $('body')).delay( 500 )
+	   .fadeOut( 10000, function(){
+	      $(this).remove();
+	   });
+	};
+//toast 2014.06.17 여기까지
 $(function() {
 	
     $('.score').click(function(){
@@ -140,7 +164,7 @@ $(function() {
 			minage : $('#minAge').html(),
 			maxage : $('#maxAge').html()
 		}, function(data){
-			alert(data);	
+			toast(data);	
 		});
 	});
 	
@@ -151,17 +175,17 @@ $(function() {
 		socket.emit('nono');
 	});
 	
-	socket.on('alert_nono', function(data){
-		alert(data + "님이 거절하셨네요 ㅜㅜ 안녕~~~~");
+	socket.on('toast_nono', function(data){
+		toast(data + "님이 거절하셨네요 ㅜㅜ 안녕~~~~");
 	});
 	
 	$('#enter').click(function() {
 		if ($('#userid').val().length == 0
 				|| $('#userid').val()[0] == " ") {
-			alert("아이디를 입력해주세요.");
+			toast("아이디를 입력해주세요.");
 		} else if ($('#roomname').val().length == 0
 				|| $('#roomname').val()[0] == " ") {
-			alert("방이름을 입력해주세요.");
+			toast("방이름을 입력해주세요.");
 		} else {
 			
 			$.post('/getMyChatProfile', {
@@ -223,7 +247,7 @@ $(function() {
 		    $('#after').css('background-image','none');
 	    	$('#okok, #nono, #after>span').css('display','');
 	    	$('#after').unbind('click');
-			alert(youData.id  + '님이after신청했어요!');
+			toast(youData.id  + '님이after신청했어요!');
 		}
 	 });
 	

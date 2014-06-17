@@ -4,28 +4,29 @@ var PWConfirm;
 var check = 'id';
 var socket = io.connect('http://localhost:4000');
 
+//toast 2014.06.17
 var toast = function(msg){
-	   $("<div> <div  class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h4>"+msg+"</h4></div></div> ")
+	   $("<div><div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h4><span class='glyphicon glyphicon-warning-sign'></span>&nbsp"+msg+"</h4></div></div> ")
 	   .css({ display: "block", 
 	      opacity: 0.90, 
 	      position: "fixed",
 	      "text-align": "center",
-	      border: "1px solid red",
-	      width: "70%",
+	      border: "1px solid #FFC091",
+	      width: "67%",
 	      height: "6%",
 	      color: "white",
-	      "background-color": "#e35e4b",
-	      "border-radius": "10px",
+	      "background-color": "#FFC091",
+	      "border-radius": "5px",
 	      
 	       left: $(window).width()/6,
-	      top: $(window).height()/3 })
-	      
-	   .appendTo( $('.item')).delay( 500 )
+	       top: $(window).height()/2 })
+	     
+	   .appendTo( $('body')).delay( 500 )
 	   .fadeOut( 3000, function(){
 	      $(this).remove();
 	   });
-	}
-
+	};
+//toast 2014.06.17 여기까지
 function moveSignPage(){
 	$('#signPage').click();
 }
