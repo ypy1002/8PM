@@ -2,7 +2,7 @@ var IDConfirm;
 var searchID;
 var PWConfirm;
 var check = 'id';
-var socket = io.connect('http://192.168.200.77:4000');
+var socket = io.connect('http://localhost:4000');
 
 var toast = function(msg){
 	   $("<div> <div  class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h4>"+msg+"</h4></div></div> ")

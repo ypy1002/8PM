@@ -1,6 +1,6 @@
 var myData = 0;
 var chatStatus = 0;
-var socket = io.connect('http://192.168.200.77:4000');
+var socket = io.connect('http://localhost:4000');
 var blindHeight = 12.8;
 var blindPhoto = 12.8;
 $(function() {
