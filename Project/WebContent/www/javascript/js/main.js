@@ -200,7 +200,7 @@ $(function() {
 			
 			$('#log').css('display', 'none');
 			$('#chat').css('display', '');
-			$(".timerDiv").html( 10 + ":" + 00 );
+			$(".timerDiv2").text( 10 + ":" + 00 );
 		}
 	});
 	  
@@ -347,7 +347,7 @@ function timer2(){
 function timer() {
 	
    var minute = 1;
-   var second = 1;
+   var second = 10;
    var miliSecond = 55;
    var aaa = setInterval(function(){
 	   
@@ -356,11 +356,10 @@ function timer() {
 		   clearInterval(aaa);
 	   }
 	   
-	   $(".timerDiv").html( minute + ":" + second );
+	   $(".timerDiv2").html( minute + ":" + second );
 	   
 	   if(minute == 1 && second == 0){
 		   $('#txtarea').append('<br><div id="oneMin"><p>3분남았어요!</p></div>');
-		   $('.timerDiv').css('font-size', '270' + '%');
 		   
 		   var bbb = setInterval(function(){
 			   
@@ -372,9 +371,10 @@ function timer() {
 				   $('#miliSpan').remove();
 			   }
 			   
-			   $('.timerDiv').append('<span id="miliSpan">' + ':' + miliSecond + '</span>');
+			   $('.timerDiv2').append('<span id="miliSpan">' + ':' + miliSecond + '</span>');
 			   
 			   if(minute == 0 && second == "aaa" && miliSecond === "00"){
+				   console.log('asd');
 				   clearInterval(bbb);
 			   }
 			   

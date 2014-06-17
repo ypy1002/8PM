@@ -69,10 +69,11 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 .abcd{margin-bottom: 1%; margin-top: 3%; font-size: 80%;}
 .time1 { font-size : 60%; }
 #oneMin { font-size : 80%;}
-.timerDiv { display : inline-block; height : 100%; width : 42.19%; font-size: 470%; padding-left: 4%;}
+.timerDiv { display : inline-block; height : 100%; width : 42.19%; padding-left: 4%;}
 .afterDiv { display : inline-block; height : 100%; width : 23.59%; }
 #okok, #nono { line-height: 100%; }
-#miliSpan { font-weight: normal;}
+.timerDiv2 { font-size: 270%; }
+.timerP { line-height: 0px; background-color: none; margin: 0px; color : black; text-align: left;}
 
 /* 채팅 끝이에용 */
 

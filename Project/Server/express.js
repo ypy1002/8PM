@@ -10,7 +10,7 @@ var app = express();
 var LoginUserUNO;
 
 // 서버, 메인, 업데이트
-asdfsdfasdfasdfasfasdfa
+
 var connection = mysql.createConnection(
     {	
       host     : '192.168.200.77',   /* host     : '192.168.200.77',*/
