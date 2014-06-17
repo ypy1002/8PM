@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/style/lib/bootstrap.css"/>
+<link rel='stylesheet' href='/style/css/login.css' />
+<script src='http://192.168.200.77:4000/socket.io/socket.io.js'></script>
+</head>
+<body>
+
+  <div class="panel-body">
+    <div id="carousel-example-generic" class="carousel slide">
+  		<div class="carousel-inner">
+    		<div class="item active">
+    		  <img src="/img/modify_8pm.png" id='clock'/>
+  				<h1 id='color'>8 PM</h1>
+  
+				  <div id='box'>
+				    
+			      <div class="form-group">
+			      	<input name='userID' id='inputID' type='text' class="form-control" placeholder="ID" /> 
+			      </div>
+			      
+			      <div class="form-group">
+			        <input name='userPW' id='inputPW' type="password" class="form-control" placeholder="비밀번호" />
+			      </div>
+			
+				    <div id=btnBox>
+				      <button id='loginBtn' type='button' class='btn btn-success'>Login</button>
+				      <button id='signinBtn' type='button' class='btn btn-success' href="#carousel-example-generic" data-slide="prev">Sign In</button>
+				    </div>
+				  
+				    <div id=anchorDiv>
+				      <a href="#carousel-example-generic" data-slide="next" id='moveSearch' onclick='selectSearch(this);'>ID/PW찾기</a>
+				    </div><br>
+				    
+				  </div>
+		    </div>
+		    
+		    <div class="item">
+		    <div class="panel panel-success">
+		      <div class="panel-heading">
+				    
+						<button id='prevBtn' class="btn btn-success btn2" href="#carousel-example-generic" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>Login
+						</button>
+						
+						<span id='searchSpan'>ID/PW 찾기</span>
+				  </div>
+				  </div>
+		    	
+		    	<ul class="nav nav-tabs">
+					  <li class="active" ><a href="#IDSearch" data-toggle="tab" id='idSearch' onclick='selectSearch(this);'>ID찾기</a></li>
+					  <li><a href="#PWSearch" data-toggle="tab" id='pwSearch' onclick='selectSearch(this);'>PW찾기</a></li>
+					</ul>
+
+					<div class="tab-content">
+					  <div class="tab-pane active" id="IDSearch">
+						  <div id='alldiv' >
+						
+							 	<div class="form-group idEndHidden idFirstShow">
+									<input id="idSearchTelNo" class="form-control idInput" type="text" numberonly='true' placeholder="전화번호입력 01012341234" maxlength="11"/>
+									<label for='idSearchTelNo' id='idSearchTelNoLabel'></label>
+									<br>
+									<button id="idNumberBtn" type="button" class='btn btn-success btn-block'>인증번호 받기</button>
+							 	</div>
+							 	
+								
+							  <div class="form-group idEndHidden idFirstHidden idNumberDiv">
+									<input id="idNumber" class="form-control idInput" type="text" numberonly='true' maxlength="4" placeholder="인증번호">
+									<label for='idNumber' id='idNumberLabel'>인증번호가 틀렸습니다.</label>
+									<br>
+									<button id="idSubmitBtn" type="button" class='btn btn-success btn-block'>인증</button>
+							  </div>
+								
+								<br><br>
+								<div id="userID" class='idFirstHidden'></div>
+								<br><br>
+								
+							</div>
+					  </div>
+					  
+					  <div class="tab-pane" id="PWSearch">
+						  <div id='alldiv' >
+							  <div class="form-group pwEndHidden pwFirstShow">
+									<input id="pwSearchID" class="form-control pwInput" maxlength="20" placeholder="ID입력" />
+									<label for='pwSearchID' id='pwSearchIDLabel'></label>
+							  </div>
+							  
+								<div class="form-group pwEndHidden pwFirstShow">
+									<input id="pwSearchTelNo" class="form-control pwInput" numberonly='true' maxlength="11" placeholder="전화번호 '-'없이 입력" />
+									<label for='pwSearchTelNo' id='pwSearchTelNoLabel'></label>
+									<br>
+									<button id="pwNumberBtn" class='btn btn-success btn-block' type="button">인증번호 받기</button>
+							  </div>
+							  
+						  
+							  <div class="form-group pwEndHidden pwFirstHidden pwNumberDiv">
+									<input id="pwNumber" class="form-control pwInput" placeholder="인증번호" numberonly='true' maxlength="4" >
+									<label for='pwNumber' id='pwNumberLabel'>인증번호가 틀렸습니다.</label>
+									<br>
+									<button id="pwSubmitBtn" type="button" class='btn btn-success btn-block'>인증</button>
+							  </div>
+							  
+								
+							  <div class="form-group updateShow pwFirstHidden">
+									<input id="pwUpdate" class="form-control pwInput" type="password" placeholder="새 비밀번호"/>
+									<label for='pwUpdate' id='pwUpdateLabel'></label>
+									<input id="pwUpdateChk" class="form-control pwInput" type="password" placeholder="새 비밀번호 확인"/>
+									<label for='pwUpdateChk' id='pwUpdateChkLabel'></label>
+									<br>
+									<button id='pwUpdateBtn' type='button' class='btn btn-success btn-block'>비밀번호 변경하기</button>
+							  </div>
+							</div>
+					  </div>
+					</div>
+		  	</div>
+		  	
+		  	<div class="item" id='signBoxDiv'>
+					<div class="panel panel-success">
+		      	<div class="panel-heading">
+				   
+							<button id='nextBtn' class="btn btn-success" href="#carousel-example-generic" data-slide="next">
+							Login<span class="glyphicon glyphicon-chevron-right"></span>
+							</button>
+						
+						  <span id='signSpan'>회원가입</span>
+				 		</div>
+				  </div>
+
+				<div id='mainBox'>
+
+					<span class="glyphicon glyphicon-asterisk" id='signGenderTypo'></span>
+					<span class="glyphicon glyphicon-ok" id='signGenderTypoSuccess' style='display:none'></span>
+					<div id='man' class='sex' onclick='genderCheck(this);'></div>
+					<div id='woman' class='sex' onclick='genderCheck(this);'></div>
+					<label for='signGender' id='signGenderLabel'></label>
+					<input type="text" style='display:none' id='signGender' class='checkInput'>
+	  			<label class="control-label" for="inputSuccess2" id='useIdChkLabel'></label>
+	  
+						<div id='signIdDiv'>
+						  <span class="glyphicon glyphicon-asterisk" id='signIdTypo'></span>
+						  <span class="glyphicon glyphicon-ok" id='signIdTypoSuccess' style='display:none'></span>
+						  <input type="text" class="form-control checkInput" id="signId" placeholder='ID(6자이상)' maxlength="20">
+						  <label for='signId' id='signIdLabel'></label>
+						  <label for='signId' id='signIdOKLabel'></label>
+					  </div>
+					  
+					  <div id='signPwDiv'>
+					  	<span class="glyphicon glyphicon-asterisk" id='signPwTypo'></span>
+					  	<span class="glyphicon glyphicon-ok" id='signPwTypoSuccess' style='display:none'></span>
+						  <input type="password" class="form-control checkInput" id="signPw" placeholder="비밀번호(8자이상)" maxlength="25">
+						  <label for="signPw" id='signPwLabel'></label>
+					  </div>
+					  
+					  <div id='signPwConfirmDiv'>
+					  	<span class="glyphicon glyphicon-asterisk" id='signPwConfirmTypo'></span>
+					  	<span class="glyphicon glyphicon-ok" id='signPwConfirmTypoSuccess' style='display:none'></span>
+						  <input type="password" class="form-control checkInput" id="signPwConfirm" placeholder="비밀번호확인" maxlength="25"  >
+						  <label for="signPwConfirm" id='signPwConfirmLabel'></label>
+					  </div>
+
+						<div id='signNameDiv'>
+							<span class="glyphicon glyphicon-asterisk" id='signNameTypo'></span>
+							<span class="glyphicon glyphicon-ok" id='signNameTypoSuccess' style='display:none'></span>
+						  <input type="text" class="form-control checkInput" id="signName" placeholder="이름" maxlength="10">
+						  <label for="signName" id='signNameLabel'></label>
+						</div>
+					  
+					  <div id='signYearDiv' class='dateBox'>
+					  	<span class="glyphicon glyphicon-asterisk" id='signYearTypo'></span>
+					  	<span class="glyphicon glyphicon-ok" id='signYearTypoSuccess' style='display:none'></span>
+						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS" id='signYear' placeholder="년" maxlength="4">
+						  <label id='AgeLabel'></label>
+					  </div>
+
+					  <div id='signMonthDiv' class='dateBox'>
+					  	<span class="glyphicon glyphicon-asterisk" id='signMonthTypo'></span>
+					  	<span class="glyphicon glyphicon-ok" id='signMonthTypoSuccess' style='display:none'></span>
+						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS2"id='signMonth' placeholder="월" maxlength="2">
+					  </div>
+
+					  <div id='signDayDiv' class='dateBox'>
+					  	<span class="glyphicon glyphicon-asterisk" id='signDayTypo'></span>
+					  	<span class="glyphicon glyphicon-ok" id='signDayTypoSuccess' style='display:none'></span>
+						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS2" id='signDay' placeholder="일" maxlength="2">
+					  </div>
+					  
+					  <div id='dateLabelDiv'>
+							<label for='signYearLabel' id='signYearLabel'></label>
+							<label for='signMonthLabel' id='signMonthLabel'></label>
+							<label for='signDayLabel' id='signDayLabel'></label>
+						</div><br>
+		
+					  <div id='signPhoneNumberDiv'>
+					  	<span class="glyphicon glyphicon-asterisk" id='signPhoneNumberTypo'></span>
+					  	<span class="glyphicon glyphicon-ok" id='signPhoneNumberTypoSuccess' style='display:none'></span>
+						  <input type="text" class="form-control checkInput" id="signPhoneNumber" placeholder="휴대폰번호" maxlength="11">
+						  <button type="button" class="btn btn-success btn-sm" id="number">인증번호받기</button> 
+						  <button type="button" class="btn btn-success btn-sm" id="signEnd" style='display:none'>회원가입 완료하기</button>
+						  <label for ='signPhoneNumber' id='signPhoneNumberLabel'></label>
+						  <label for ='signPhoneNumber' id='signPhoneNumberOKLabel'></label>
+						</div>
+					
+						<div id='signRecievedNumberDiv'>
+					  	<input type="text" class="form-control" id="signRecievedNumber" style='display:none' placeholder="인증번호입력">
+							<button type="button" class="btn btn-success btn-sm" id="complete" style='display:none'>인증</button>
+					 		<label for='signRecievedNumber' id='signRecievedNumberLabel'>인증번호가 틀렸습니다.</label>
+					 	</div>
+					</div>
+		    </div>
+		  </div>
+		</div>
+  </div>
+<script src="/script/lib/toast.js"></script>
+<script src="/script/lib/jquery-1.11.1.js"></script>
+<script src="/script/lib/bootstrap.js"></script>
+<script src="/script/js/login.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+    
+<link rel="stylesheet" href="/style/lib/bootstrap.css"/>
+<link rel='stylesheet' href='/style/css/profile.css' />
+
+</head>
+
+<body>
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 style='display:inline;' class="panel-title">기본 프로필 입력</h3>
+    
+    <button class="btn btn-success" id='submit' onclick='formCheck();'>완료</button>
+    
+	
+		<button id='nextBtn' class="btn btn-default btn2" href="#carousel-example-generic" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+		
+		<button id='prevBtn' class="btn btn-default btn2" href="#carousel-example-generic" data-slide="prev">
+		  <span class="glyphicon glyphicon-chevron-left"></span>
+		</button>
+ 
+  </div>
+  
+  <div class="panel-body">
+    <div id="carousel-example-generic" class="carousel slide">
+  		<div class="carousel-inner">
+    		<div class="item active">
+	    		<label id='city1Label' class='formCheckLabel'>지역을 선택해주세요.</label>
+	    		<div class="panel panel-info">
+			  		<div class="panel-heading imgDiv" id='cityImg'></div>
+			  		<div class="panel-body">
+			  			<p>지역</p>
+					  	<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","seoul");'id='seoul'>서울</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","busan");'id='busan'>부산</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","incheon");'id='incheon'>인천</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","gangju");'id='gangju'>광주</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","daejeon");' id='daejeon'>대전</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","daegu");'id='daegu'>대구</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","ulsan");'id='ulsan'>울산</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","gyungi");'id='gyungi'>경기</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","gangwon");'id='gangwon'>강원</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","chungbuk");'id='chungbuk'>충북</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","chungnam");'id='chungnam'>충남</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","sejong");'id='sejong'>세종</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","jeonbuk");'id='jeonbuk'>전북</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","jeonnam");'id='jeonnam'>전남</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","kyungbuk");'id='kyungbuk'>경북</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","kyungnam");'id='kyungnam'>경남</button>
+							<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","jeju");'id='jeju'>제주</button>
+							<div id='city1Div'>
+								<input type=text id='city1'>
+							</div>
+			 			</div>
+					</div>
+		    </div>
+		    <div class="item"> 	
+					<label id='blood1Label' class='formCheckLabel'>혈액형을 선택해주세요.</label>	
+			    <div class="panel panel-info">
+				  	<div class="panel-heading imgDiv" id='bloodImg'></div>
+						<div class="panel-body">
+							<p>혈액형</p>
+						  <button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","a");'id='a'>A형</button>
+							<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","b");'id='b'>B형</button>
+							<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","o");'id='o'>O형</button>
+							<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","ab");'id='ab'>AB형</button>
+							<div id='blood1Div'>
+								<input type=text id='blood1'>
+							</div>
+						</div>
+			  	</div>
+		  	</div>
+		 	  <div class="item"> 	
+		 			<div class="panel panel-info">
+		 			<div class="panel-heading imgDiv" id='jobImg'></div>
+						<div class="panel-body">
+							<div id='job1Div'>
+								<p>직업</p>
+								<input type="text" class="form-control input-sm" id="job1" onkeyup="eventonkeypress('#job1');" placeholder="예) 교사, 공무원, 학생">
+					 		  <label class='onkey' for='job1' id='job1Label'></label>
+				 		  </div>
+						</div>
+					</div>
+			  </div>
+			  <div class="item"> 	
+				  <div class="panel panel-info">
+				  	<div class="panel-heading imgDiv" id='faceImg'></div>
+						<div class="panel-body">
+							<p>외모</p>
+							<div id='face1Div'>
+							  <input type="text" class="form-control input-sm" id="face1" onkeyup="eventonkeypress('#face1');" placeholder="예) 큰 눈, 가는 허리">
+					 		  <label class='onkey' for='face1' id='face1Label'></label>
+					 		</div>
+					 		
+					 		<div id='face2Div'>
+					      <input type="text" class="form-control input-sm" id="face2" onkeyup="eventonkeypress('#face2');" placeholder="예) 높은 콧날, 섹시한 목젖">
+					      <label class='onkey' for='face2' id='face2Label'></label>
+				      </div>
+				      
+					    <div id='face3Div'>
+					      <input type="text" class="form-control input-sm" id="face3" onkeyup="eventonkeypress('#face3');">
+					      <label class='onkey' for='face3' id='face3Label'></label>
+				      </div>
+			      
+				      <div id='face4Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="face4" onkeyup="eventonkeypress('#face4');">
+					      <label class='onkey' for='face4' id='face4Label'></label>
+				      </div>
+				      
+				      <div id='face5Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="face5" onkeyup="eventonkeypress('#face5');">
+					      <label class='onkey' for='face5' id='face5Label'></label>
+				      </div>
+				      
+				      <button class="btn btn-default" type="button" id='facePlus' onclick='plus("#face");'>추가</button>
+				      <button class="btn btn-default" type="button" id='faceMinus' style="display:none" onclick='minus("#face");'>취소</button>
+						</div>
+					</div>
+			  </div>
+			  <div class="item"> 	
+				  <div class="panel panel-info">
+					  <div class="panel-heading imgDiv" id='styleImg'></div>
+						<div class="panel-body">
+						  <p>스타일</p>
+							<div id='style1Div'>
+							  <input type="text" class="form-control input-sm" id="style1" onkeyup="eventonkeypress('#style1');" placeholder="예) 귀여움, 섹시함">
+						 		<label class='onkey' for='style1'  id='style1Label'></label>
+						 	</div>
+						 	
+						 	<div id='style2Div'>
+					      <input type="text" class="form-control input-sm" id="style2" onkeyup="eventonkeypress('#style2');" placeholder="예) 지적임, 터프함">
+					      <label class='onkey' for='style2'  id='style2Label'></label>
+					    </div>
+					    
+					    <div id='style3Div'>
+					      <input type="text" class="form-control input-sm" id="style3" onkeyup="eventonkeypress('#style3');">
+					      <label class='onkey' for='style3'  id='style3Label'></label>
+					    </div> 
+					      
+					    <div id='style4Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="style4" onkeyup="eventonkeypress('#style4');" >
+					      <label class='onkey' for='style4'  id='style4Label'></label>
+					    </div>  
+					      
+					    <div id='style5Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="style5" onkeyup="eventonkeypress('#style5');" >
+					      <label class='onkey' for='style5'  id='style5Label'></label>
+				      </div>
+				      
+				      <button class="btn btn-default" type="button" id='stylePlus' onclick='plus("#style");'>추가</button>
+				      <button class="btn btn-default" type="button" id='styleMinus' style="display:none" onclick='minus("#style");'>취소</button>
+						</div>
+					</div>
+			  </div>
+			  <div class="item"> 	
+				  <div class="panel panel-info">
+				 		<div class="panel-heading imgDiv" id='personalityImg'></div>
+						<div class="panel-body">
+							<p>성격</p>
+							<div id='personality1Div'>
+							  <input type="text" class="form-control input-sm" id="personality1" onkeyup="eventonkeypress('#personality1');" placeholder="예) 꼼꼼함, 지루함">
+						 		<label class='onkey' for='personality1'  id='personality1Label'></label>
+						 	</div>
+						 	
+						 	<div id='personality2Div'>	
+					      <input type="text" class="form-control input-sm" id="personality2" onkeyup="eventonkeypress('#personality2');" placeholder="예) 도도함, 터프함">
+					      <label class='onkey' for='personality2'  id='personality2Label'></label>
+					    </div>
+					    
+					    <div id='personality3Div'> 
+					      <input type="text" class="form-control input-sm" id="personality3" onkeyup="eventonkeypress('#personality3');">
+					      <label class='onkey' for='personality3'  id='personality3Label'></label>
+					    </div>
+					    
+					    <div id='personality4Div'> 
+					      <input type="text" class="form-control input-sm toggleInput" id="personality4" onkeyup="eventonkeypress('#personality4');" >
+					      <label class='onkey' for='personality4'  id='personality4Label'></label>
+					    </div>
+					    
+					    <div id='personality5Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="personality5" onkeyup="eventonkeypress('#personality5');" >
+					      <label class='onkey' for='personality5'  id='personality5Label'></label>
+					    </div>
+					      
+				      <button class="btn btn-default" type="button" id='personalityPlus' onclick='plus("#personality");'>추가</button>
+				      <button class="btn btn-default" type="button" id='personalityMinus' style="display:none" onclick='minus("#personality");'>취소</button>
+						</div>
+					</div>
+			  </div>
+			  <div class="item"> 	
+				  <div class="panel panel-info">
+				 		<div class="panel-heading imgDiv" id='hobbyImg'></div>	
+						<div class="panel-body">
+							<p>취미</p>
+							<div id='hobby1Div'>
+							  <input type="text" class="form-control input-sm" id="hobby1" onkeyup="eventonkeypress('#hobby1');" placeholder="예) 산책하기, 영화보기">
+						 		<label class='onkey' for='hobby1'  id='hobby1Label'></label>
+						 	</div>
+						 	
+						 	<div id='hobby2Div'>
+					      <input type="text" class="form-control input-sm" id="hobby2" onkeyup="eventonkeypress('#hobby2');" placeholder="예) 운동하기, 연극보기">
+					      <label class='onkey' for='hobby2'  id='hobby2Label'></label>
+					    </div>
+					    
+					    <div id='hobby3Div'>
+					      <input type="text" class="form-control input-sm" id="hobby3" onkeyup="eventonkeypress('#hobby3');">
+					      <label class='onkey' for='hobby3'  id='hobby3Label'></label>
+					    </div>
+					    
+					    <div id='hobby4Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="hobby4" onkeyup="eventonkeypress('#hobby4');" >
+					      <label class='onkey' for='hobby4'  id='hobby4Label'></label>
+					    </div>
+					    
+					    <div id='hobby5Div'>
+					      <input type="text" class="form-control input-sm toggleInput" id="hobby5" onkeyup="eventonkeypress('#hobby5');" >
+					      <label class='onkey' for='hobby5'  id='hobby5Label'></label>
+				      </div>
+				      
+				      <button class="btn btn-default" type="button" id='hobbyPlus' onclick='plus("#hobby");'>추가</button>
+				      <button class="btn btn-default" type="button" id='hobbyMinus' style="display:none" onclick='minus("#hobby");'>취소</button>
+						</div>
+				  </div>
+		    </div>
+ 			  <div class="item"> 	
+ 			  <label id='file1Label' class='formCheckLabel'>사진을 등록해주세요.</label>
+				  <div class="panel panel-default">
+				 		<div class="panel-heading imgDiv2">
+				 		
+					 		<form method = 'post' enctype='multipart/form-data' id='form' action='http://14.32.7.49:4000/upload'>
+					 		
+					 			<div class='photoDiv' id='upload_file1' onclick='whereClickFileDiv(this);'></div>
+					 			<input class="file" id="file1" name='image1' type='file' multiple title="test #1"/>
+					 			
+					 			<div class='photoDiv' id='upload_file2' onclick='whereClickFileDiv(this);'></div>
+					 			<input class="file" id="file2" name='image2' type='file' multiple title="test #2"/>
+					 			
+					 			<div class='photoDiv' id='upload_file3' onclick='whereClickFileDiv(this);'></div>
+					 			<input class="file" id="file3" name='image3' type='file' multiple title="test #3"/>
+					 			
+					 			<div class='photoDiv' id='upload_file4' onclick='whereClickFileDiv(this);'></div>
+					 			<input class="file" id="file4" name='image4' type='file' multiple title="test #4"/>
+					 			
+					 			<button id='photoSubmit' type="submit"></button>
+					 		</form>
+				 		</div>	
+					 	<p>사진</p>
+				  </div>
+		    </div>
+		  </div>
+		</div>
+  </div>
+</div>
+	  
+<ol class="carousel-indicators">
+  <li data-target="#carousel-example-generic" data-slide-to="0" class="active" id='cityBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="1" id='bloodBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="2" id='jobBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="3" id='faceBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="4" id='styleBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="5" id='personalityBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="6" id='hobbyBox'></li>
+  <li data-target="#carousel-example-generic" data-slide-to="7" id='photoBox'></li>
+</ol>
+ 
+<input class="form-control input-sm" id='faceInputCount' style='display:none' value='0'>
+<input class="form-control input-sm" id='styleInputCount' style='display:none' value='0'>
+<input class="form-control input-sm" id='personalityInputCount' style='display:none' value='0'>
+<input class="form-control input-sm" id='hobbyInputCount' style='display:none' value='0'>
+	  
+
+<script src="/script/lib/jquery-1.11.1.js"></script>
+<script src="/script/lib/bootstrap.js"></script>
+<script src="/script/lib/jquery.preimage.js"></script>
+<script src="/script/js/profile.js"></script>
+
+</body>
+</html>

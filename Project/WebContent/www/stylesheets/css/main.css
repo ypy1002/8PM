@@ -1,0 +1,95 @@
+/* 메인이에용 */
+
+html , body, .panel-body,#carousel-example-generic, .carousel, .carousel-inner, .carousel-inner > .active, .panel-success ,.panel-body, .carousel-inner > .item,#chat  {height: 100%; width: 100%;}
+html, body, .panel-success, .panel-body, .carousel, .carousel-inner, .carousel-inner > .item, .panel-info , .panel-default { height: 100%; }
+#timerDiv {margin-bottom: 15%; margin-top: 5%; color: lightslategray; text-align: center;}
+span { font-weight: bold; }
+.panel-footer{  position: absolute; bottom: 0;  width:100%; }
+#logoutBtn{float: right;}
+.time { font-weight: bold; font-size: 150%;}
+#localSelect{font-size: 120%;margin-top: 7%; margin-bottom:7%; color: teal;font-weight: bold; text-align: center;}
+#localBtn{width: 82%;}
+#cityDiv , #ageDiv { width: 80%; margin : 0px auto;};
+
+
+/* 메인 끝이에용 */
+
+
+
+/* 프로필이에용 */
+
+#form { height: 100%; }
+.panel-success > .panel-heading { height: 55px; }
+.imgDiv, .imgDiv2 { height:42%; background-size : 100% 100%;}
+.photoDiv { background-image: url("/img/photo.png"); background-size : 100% 100%; display: inline-block; height: 50%; width: 49.2%; }
+#cityImg { background-image: url("/img/city.jpg");}
+#bloodImg { background-image: url("/img/blood.jpg");}
+#jobImg { background-image: url("/img/job.jpg");}
+#faceImg { background-image: url("/img/face.jpg");}
+#styleImg { background-image: url("/img/style.jpg");}
+#personalityImg { background-image: url("/img/personality.png");}
+#hobbyImg { background-image: url("/img/hobby.jpg");}
+.btn2 { float: left; }
+#submit { float: right; }
+input { margin-bottom: 4px; }
+label { color : red; font-size : 80%; }
+.cityBtn { width : 32.29%; margin-bottom: 3px; height: 7%; }
+.bloodBtn { width : 49.2%; margin-bottom: 4px; }
+.moveMainBtn { margin-right: 6%; }
+.form-control { margin-bottom: 2%; }
+.nextBtn, .prevBtn { width: 25%;}
+.bloodBtn2 { margin-left: 25%;}
+.moveChatBtn { float: right; }
+p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;background: none repeat scroll 0% 0% lightgray; color:red; }
+
+/* 프로필 끝이에용 */
+
+
+
+/* 채팅이에용 */
+
+#txtarea { height: 60%; background-color: lightgoldenrodyellow; border : lightgray solid 2px; overflow : hidden;border-radius : 5px; padding: 15px 10px;}
+#txt { width: 78%; resize: none; margin-top: -4%; height:4.1%; border-radius: 5px;}
+#btn{margin-top: -5%; line-height: 94%; width: 20%;}
+#header{width: 100%;height: 7%;background-color:#DFF0D8;text-align:center;}
+#moveMainBtn{float: right; margin: 1.5% 2% ;line-height: 130%; }
+#sos{float: left;width: 9%;margin-left: 2%;}
+.chatDiv { display : inline-block; height : 100%; width : 31.59%;}
+#blind { background-image: url("/img/blind.png"); background-size : 100% 100%; float: left; position: absolute; height: 12.8%;}
+#picture {height: 15%;padding: 2% 2%;}
+#person { background-image: url("/img/photo.png"); background-size : 100% 100%; }
+#after { background-image: url("/img/after.png"); background-size : 100% 100%;}
+#phoneNum{padding: 1%;width: 157%;font-size:87%; font-weight:bold;}
+#scoreDiv { margin-bottom: 2%;}
+.score {width: 24.1%;}
+.mychtting { background-image: url("/img/meChat.png"); background-size : 100% 100%; padding:2%; font-size : 80%;}
+.yourchtting { background-image: url("/img/youChat.png"); background-size : 100% 100%; padding: 2%; font-size : 80%;}
+.mychat { text-align: right; }
+.joinUser { text-align: center; border-radius : 5px; background :lightgray; font-weight:bold; font-size: 80%;}
+.abcd{margin-bottom: 1%; margin-top: 3%; font-size: 80%;}
+.time1 { font-size : 60%; }
+#oneMin { font-size : 80%;}
+.timerDiv { display : inline-block; height : 100%; width : 42.19%; font-size: 470%; padding-left: 4%;}
+.afterDiv { display : inline-block; height : 100%; width : 23.59%; }
+#okok, #nono { line-height: 100%; }
+#miliSpan { font-weight: normal;}
+
+/* 채팅 끝이에용 */
+
+
+
+
+
+/* sos에용 */
+
+.modal-body {position: relative;padding: 34px 66px;height: 100%;}
+#SOSOK{width:48%;background-color:#4CAE4C;}
+#SOSCANCLE{width:48%;background-color:#FF6464;}
+h5{text-align: center;font-weight: bold;margin-top: 7%;}
+#inputText{background-color: #FAFAD2;width:95%;resize: none; margin: 0% 2.5%;border: solid #D3D3D3;border-radius:5px;height: 58%;}
+#inputText:focus{ -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(98, 196, 98, 0.6);
+ -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(98, 196, 98, 0.6);
+ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(98, 196, 98, 0.6);}
+#bbb{text-align:center; font-weight:bold; font-size:80%;height: 5%;} 
+#sosText, #button { text-align: center;}
+div#myModal { overflow: hidden; }

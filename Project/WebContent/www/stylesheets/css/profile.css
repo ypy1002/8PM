@@ -1,0 +1,27 @@
+html, body, .panel-success, .panel-body, .carousel, .carousel-inner, .carousel-inner > .item, .panel-info , .panel-default { height: 100%; }
+.panel-body { padding : 0px; }
+.imgDiv, .imgDiv2 { height:42%; background-size : 100% 100%;}
+#form { height: 100%;}
+.photoDiv { background-image: url("/img/photo.png"); background-size : 100% 100%;}
+#cityImg { background-image: url("/img/city.jpg");}
+#bloodImg { background-image: url("/img/blood.jpg");}
+#jobImg { background-image: url("/img/job.jpg");}
+#faceImg { background-image: url("/img/face.jpg");}
+#styleImg { background-image: url("/img/style.jpg");}
+#personalityImg { background-image: url("/img/personality.png");}
+#hobbyImg { background-image: url("/img/hobby.jpg");}
+h3 { line-height: 2.1; }
+.btn2, #submit { float: right; }
+input { margin-bottom: 4px; }
+label { color : red; font-size : 80%; }
+.cityBtn { width : 32.29%; margin-bottom: 4px; height: 7%; }
+.bloodBtn { width : 49.2%; margin-bottom: 4px; }
+.formCheckLabel { color : red; }
+p { text-align: center; font-weight: bold; font-size: 120%; }
+.photoDiv {display: inline-block; height: 50%; width: 49.2%; }
+.panel-success > .panel-heading { height: 55px; }
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+color: black;
+background-color: white;
+border-color: #ccc;
+}

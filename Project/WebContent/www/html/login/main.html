@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src='http://192.168.200.77:4000/socket.io/socket.io.js'></script>
+<link rel="stylesheet" href="/style/lib/bootstrap.css"/>
+<link rel='stylesheet' href='/style/lib/slider.css' />
+<link rel='stylesheet' href='/style/css/main.css' />
+
+</head>
+<body>
+	<div id="carousel-example-generic" class="carousel slide">
+		<div class="carousel-inner">
+		
+			<div class="item">
+  	    <div class="panel panel-success">
+				  <div class="panel-heading">
+				    <h2 style='display:inline;' class="panel-title">불량이용자 신고</h2>
+				    
+						<button class="btn btn-success moveChatBtn" href="#carousel-example-generic" data-slide="next">
+							채팅으로<span class="glyphicon glyphicon-chevron-right"></span>
+						</button>
+						
+				  </div>
+					  
+
+				<h5>대화내용은 자동으로 전송됩니다</h5>
+				<div id='sosText'>
+				<span>신고사유</span>
+				</div>
+				<textarea id='inputText' rows="8" style='overflow: hidden;' onkeyup='sosTextLengthCheck(this.value);'></textarea>
+				<div id='bbb'>
+					<span id='sosTextLength'>0</span><span> / 500</span><br>
+					<label for='inputText' id='inputTextLabel' style='display:none'>500Byte를 초과하면 신고가 되지 않습니다.</label>
+				</div>
+				<br>
+
+				<div id='button'>
+					<button class="btn btn-success disabled" data-toggle="modal" id='abc' data-target="#myModal">신고하기</button>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"aria-hidden="true" id='sosCloseBtn' style='display:none'>&times;</button>
+							</div>
+							<div class="modal-body">
+								<h5>허위신고의 경우 신고자에게 불이익이 발생할 수 있습니다. 정말 신고하시겠습니까?</h5>
+								<button id="SOSOK" class="btn large primary" onclick='helpMe(this);'>예</button>
+								<button id="SOSCANCLE" class="btn large primary" onclick='helpMe(this);'>아니요</button>
+							</div>
+						</div>
+					</div>
+				</div>
+		  </div>
+		  </div>
+			<div class="item">
+		  	    <div id='log'>
+						<span>아이디 : <input type='text' id='userid'></span><br>
+						<span>방이름 : <input type='text' id='roomname'></span><br>
+						<span><input type='button' id='enter' value='입장'></span>
+					</div>
+		
+		         <div id='chat' style='display: none;'>
+		                     
+		                <div id='header'>
+		               	  <img src='/img/119.png' id='sos' href="#carousel-example-generic" data-slide="prev">
+		               		<button type="button" id='moveMainBtn' class="btn btn-success" href="#carousel-example-generic" data-slide="next">메인화면</button>
+	               		</div>
+		
+		                  <div id="picture">
+			                  <div class='chatDiv' id='blind'></div>
+			                  <div class='chatDiv' id='person'></div>
+			                  <div class='timerDiv'></div>
+			                  <div class='afterDiv' id='after'>
+			                 		<button type="button" class="btn btn-warning btn-block" id='okok' style='display: none;'>수락</button>
+		                  		<button type="button" class="btn btn-warning btn-block" id='nono' style='display: none;'>거절</button>
+		                  		<span style='display: none'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
+		                    </div>
+	                    </div>
+		                  <br>
+		                   
+		                  
+		                  <span id='wait' style='display: none;'></span>
+		
+		                  
+		                   <div style='float:left; margin-top: -5%;margin-left: 1%;width: 100%;'><span class="glyphicon glyphicon-phone" style='font-size: 135%;margin-top:16%;display:inline;'></span>
+		                   <span  style='display:inline;' id='phoneNum'>애프터 후 상대방이 수락을 누르면 전화번호가 공개됩니다</span></div>
+		                   <br>
+		                   <div id='scoreDiv'><button type="button" class='glyphicon glyphicon-thumbs-up btn btn-primary score'style='display:inline;' id='plus_3'> +3</button>
+		                           <button type="button" class='glyphicon glyphicon-thumbs-up btn btn-primary score'style='display:inline;' id='plus_5'> +5</button>
+		                           <button type="button" class='glyphicon glyphicon-thumbs-up btn btn-primary score'style='display:inline;' id='plus_7'> +7</button>
+		                         <button type="button" class='glyphicon glyphicon-thumbs-down btn btn-danger score' style='display:inline;' id='minus_-10'> -10</button></div>
+		
+		               <div id='txtarea' style="overflow-y: hidden;"></div>
+		               <br>
+		               
+		               <textarea id='txt'></textarea>
+		               <button type="button" id='btn' class="btn btn-info">Enter</button>
+		            </div>
+		  </div>
+		
+		
+				<div class="item active">
+				<input type="text" id='cityInput1' style='display: none;'>
+				  	<div class="panel-body">
+							<div id='timerDiv'></div>
+							<div id='localSelect'>원하는 상대의 프로필 설정 </div>
+							<div id='cityDiv'>
+							<span>지역 : </span><button id='localBtn' class="btn btn-success selectedCity" data-toggle="modal" data-target="#cityModalClose"></button>
+							</div>
+							<div class="modal fade" id="cityModalClose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+				   		 	  <div class="modal-content">
+				      				<div class="modal-body">
+        								<button type="button" id='cityModalClose' class="close" data-dismiss="modal" aria-hidden="true" style='display:none'>&times;</button>
+				        				<button class="btn btn-default matchCityBtn" onclick='cityCheck("서울");'>서울</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("부산");'>부산</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("인천");'>인천</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("광주");'>광주</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("대전");'>대전</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("대구");'>대구</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("울산");'>울산</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("경기");'>경기</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("강원");'>강원</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("충북");'>충북</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("충남");'>충남</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("세종");'>세종</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("전북");'>전북</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("전남");'>전남</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("경북");'>경북</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("경남");'>경남</button>
+												<button class="btn btn-default matchCityBtn" onclick='cityCheck("제주");'>제주</button>
+												</div>
+					    			</div>
+					  			</div>
+								</div>
+				
+								<br><br>
+								<div id='ageDiv'>
+									<span>나이 : </span><b id='minAge'>20</b><input id="select" type="text" class="span2"	 
+					       																data-slider-min="20" data-slider-max="60" data-slider-step="1" 
+					       																data-slider-value="[20,60]"/> <b id='maxAge'>60</b>
+								</div>
+								<br>
+								<button id='waitBtn' type="button" class="btn btn-success btn-block">설정하기</button>
+								<br>
+								<button type="button" id="chatBtn" class="btn btn-success btn-block" href="#carousel-example-generic" data-slide="prev">채팅 입장</button>
+							</div> <!-- 패널 바디 종료 -->
+							<div class="panel-footer">
+								<button id='modifyProfile' type="button" class="btn btn-success" href="#carousel-example-generic" data-slide="next">프로필 수정</button><!-- onclick="location.href='/html/profile/update.html'" -->
+								<button id='logoutBtn' type="button" class="btn btn-default" onclick="location.href='/html/login/login.html'">
+						  			<span class="glyphicon glyphicon-off"></span>로그아웃
+								</button>
+							</div>
+		   		</div>
+		    
+		    	<div class="item">
+			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn bloodBtn2" href="#carousel-example-generic" data-slide="next">
+									혈액형<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+						  </div>
+						  
+					  	<label id='city1Label' class='formCheckLabel'>지역을 선택해주세요.</label>
+	    				<div class="panel panel-info">
+			  				<div class="panel-heading imgDiv" id='cityImg'></div>
+			  				<div class="panel-body">
+			  					<p>지역</p>
+							  	<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","seoul");'id='seoul'>서울</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","busan");'id='busan'>부산</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","incheon");'id='incheon'>인천</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","gangju");'id='gangju'>광주</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","daejeon");' id='daejeon'>대전</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","daegu");'id='daegu'>대구</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","ulsan");'id='ulsan'>울산</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","gyungi");'id='gyungi'>경기</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","gangwon");'id='gangwon'>강원</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","chungbuk");'id='chungbuk'>충북</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","chungnam");'id='chungnam'>충남</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","sejong");'id='sejong'>세종</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","jeonbuk");'id='jeonbuk'>전북</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","jeonnam");'id='jeonnam'>전남</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","kyungbuk");'id='kyungbuk'>경북</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","kyungnam");'id='kyungnam'>경남</button>
+									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","jeju");'id='jeju'>제주</button>
+									<div id='city1Div'>
+										<input type=text id='city1' data-formCheck='true'>
+									</div>
+			 					</div>
+							</div>
+  					</div>
+		  		</div>
+		  		
+		  		<div class="item">
+		    		<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>지역
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn" href="#carousel-example-generic" data-slide="next">
+									직업<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+						 
+						  </div>
+  						<label id='blood1Label' class='formCheckLabel'>혈액형을 선택해주세요.</label>	
+					    <div class="panel panel-info">
+						  	<div class="panel-heading imgDiv" id='bloodImg'></div>
+								<div class="panel-body">
+									<p>혈액형</p>
+								  <button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","a");'id='a'>A형</button>
+									<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","b");'id='b'>B형</button>
+									<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","o");'id='o'>O형</button>
+									<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","ab");'id='ab'>AB형</button>
+									<div id='blood1Div'>
+										<input type=text id='blood1' data-formCheck='true'>
+									</div>
+								</div>
+					  	</div>
+		  			</div>
+		  		</div>
+		  		
+		  		<div class="item">
+ 			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>혈액형
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn" href="#carousel-example-generic" data-slide="next">
+									외모<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+								
+						  </div>
+					  	<div class="panel panel-info">
+					 			<div class="panel-heading imgDiv" id='jobImg'></div>
+								<div class="panel-body">
+									<div id='job1Div'>
+										<p>직업</p>
+										<input type="text" class="form-control input-sm" id="job1" onkeyup="eventonkeypress('#job1');" placeholder="예) 교사, 공무원, 학생"  data-formCheck='true'>
+							 		  <label class='onkey' for='job1' id='job1Label'></label>
+						 		  </div>
+								</div>
+							</div>
+					  </div>
+		  		</div>
+		  		
+		  		<div class="item">
+ 			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>직업
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn" href="#carousel-example-generic" data-slide="next">
+									스타일<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+								
+						  </div>
+						  <div class="panel panel-info">
+						  	<div class="panel-heading imgDiv" id='faceImg'></div>
+								<div class="panel-body">
+									<p>외모</p>
+									<div id='face1Div'>
+									  <input type="text" data-formCheck='true' class="form-control input-sm" id="face1" onkeyup="eventonkeypress('#face1');" placeholder="예) 큰 눈, 가는 허리">
+							 		  <label class='onkey' for='face1' id='face1Label'></label>
+							 		</div>
+							 		
+							 		<div id='face2Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="face2" onkeyup="eventonkeypress('#face2');" placeholder="예) 높은 콧날, 섹시한 목젖">
+							      <label class='onkey' for='face2' id='face2Label'></label>
+						      </div>
+						      
+							    <div id='face3Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="face3" onkeyup="eventonkeypress('#face3');">
+							      <label class='onkey' for='face3' id='face3Label'></label>
+						      </div>
+					      
+						      <div id='face4Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="face4" onkeyup="eventonkeypress('#face4');">
+							      <label class='onkey' for='face4' id='face4Label'></label>
+						      </div>
+						      
+						      <div id='face5Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="face5" onkeyup="eventonkeypress('#face5');">
+							      <label class='onkey' for='face5' id='face5Label'></label>
+						      </div>
+						      
+						      <button class="btn btn-default" type="button" id='facePlus' onclick='plus("#face");'>추가</button>
+						      <button class="btn btn-default" type="button" id='faceMinus' style="display:none" onclick='minus("#face");'>취소</button>
+								</div>
+							</div>
+					  </div>
+		  		</div>
+		  		
+		  		<div class="item">
+ 			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>외모
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn" href="#carousel-example-generic" data-slide="next">
+									성격<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+								
+						  </div>
+						  <div class="panel panel-info">
+							  <div class="panel-heading imgDiv" id='styleImg'></div>
+								<div class="panel-body">
+								  <p>스타일</p>
+									<div id='style1Div'>
+									  <input type="text" data-formCheck='true' class="form-control input-sm" id="style1" onkeyup="eventonkeypress('#style1');" placeholder="예) 귀여움, 섹시함">
+								 		<label class='onkey' for='style1'  id='style1Label'></label>
+								 	</div>
+								 	
+								 	<div id='style2Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="style2" onkeyup="eventonkeypress('#style2');" placeholder="예) 지적임, 터프함">
+							      <label class='onkey' for='style2'  id='style2Label'></label>
+							    </div>
+							    
+							    <div id='style3Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="style3" onkeyup="eventonkeypress('#style3');">
+							      <label class='onkey' for='style3'  id='style3Label'></label>
+							    </div> 
+							      
+							    <div id='style4Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="style4" onkeyup="eventonkeypress('#style4');" >
+							      <label class='onkey' for='style4'  id='style4Label'></label>
+							    </div>  
+							      
+							    <div id='style5Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="style5" onkeyup="eventonkeypress('#style5');" >
+							      <label class='onkey' for='style5'  id='style5Label'></label>
+						      </div>
+						      
+						      <button class="btn btn-default" type="button" id='stylePlus' onclick='plus("#style");'>추가</button>
+						      <button class="btn btn-default" type="button" id='styleMinus' style="display:none" onclick='minus("#style");'>취소</button>
+								</div>
+							</div>
+					  </div>
+		  		</div>
+		  		
+		  		<div class="item">
+ 			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>스타일
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn" href="#carousel-example-generic" data-slide="next">
+									취미<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+						  </div>
+						  <div class="panel panel-info">
+						 		<div class="panel-heading imgDiv" id='personalityImg'></div>
+								<div class="panel-body">
+									<p>성격</p>
+									<div id='personality1Div'>
+									  <input type="text" data-formCheck='true' class="form-control input-sm" id="personality1" onkeyup="eventonkeypress('#personality1');" placeholder="예) 꼼꼼함, 지루함">
+								 		<label class='onkey' for='personality1'  id='personality1Label'></label>
+								 	</div>
+								 	
+								 	<div id='personality2Div'>	
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="personality2" onkeyup="eventonkeypress('#personality2');" placeholder="예) 도도함, 터프함">
+							      <label class='onkey' for='personality2'  id='personality2Label'></label>
+							    </div>
+							    
+							    <div id='personality3Div'> 
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="personality3" onkeyup="eventonkeypress('#personality3');">
+							      <label class='onkey' for='personality3'  id='personality3Label'></label>
+							    </div>
+							    
+							    <div id='personality4Div'> 
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="personality4" onkeyup="eventonkeypress('#personality4');" >
+							      <label class='onkey' for='personality4'  id='personality4Label'></label>
+							    </div>
+							    
+							    <div id='personality5Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="personality5" onkeyup="eventonkeypress('#personality5');" >
+							      <label class='onkey' for='personality5'  id='personality5Label'></label>
+							    </div>
+							      
+						      <button class="btn btn-default" type="button" id='personalityPlus' onclick='plus("#personality");'>추가</button>
+						      <button class="btn btn-default" type="button" id='personalityMinus' style="display:none" onclick='minus("#personality");'>취소</button>
+								</div>
+							</div>
+					  </div>
+		  		</div>
+		  		
+		  		<div class="item">
+ 			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						    <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						    
+						    <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>성격
+								</button>
+							
+								<button class="btn btn-default btn2 nextBtn" href="#carousel-example-generic" data-slide="next">
+									사진<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+								
+						  </div>
+						  <div class="panel panel-info">
+						 		<div class="panel-heading imgDiv" id='hobbyImg'></div>	
+								<div class="panel-body">
+									<p>취미</p>
+									<div id='hobby1Div'>
+									  <input type="text" data-formCheck='true' class="form-control input-sm" id="hobby1" onkeyup="eventonkeypress('#hobby1');" placeholder="예) 산책하기, 영화보기">
+								 		<label class='onkey' for='hobby1'  id='hobby1Label'></label>
+								 	</div>
+								 	
+								 	<div id='hobby2Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="hobby2" onkeyup="eventonkeypress('#hobby2');" placeholder="예) 운동하기, 연극보기">
+							      <label class='onkey' for='hobby2'  id='hobby2Label'></label>
+							    </div>
+							    
+							    <div id='hobby3Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm" id="hobby3" onkeyup="eventonkeypress('#hobby3');">
+							      <label class='onkey' for='hobby3'  id='hobby3Label'></label>
+							    </div>
+							    
+							    <div id='hobby4Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="hobby4" onkeyup="eventonkeypress('#hobby4');" >
+							      <label class='onkey' for='hobby4'  id='hobby4Label'></label>
+							    </div>
+							    
+							    <div id='hobby5Div'>
+							      <input type="text" data-formCheck='true' class="form-control input-sm toggleInput" id="hobby5" onkeyup="eventonkeypress('#hobby5');" >
+							      <label class='onkey' for='hobby5'  id='hobby5Label'></label>
+						      </div>
+						      
+						      <button class="btn btn-default" type="button" id='hobbyPlus' onclick='plus("#hobby");'>추가</button>
+						      <button class="btn btn-default" type="button" id='hobbyMinus' style="display:none" onclick='minus("#hobby");'>취소</button>
+								</div>
+						  </div>
+					  </div>
+		  		</div>
+		  		
+		  		<div class="item">
+ 			    	<div class="panel panel-success">
+						  <div class="panel-heading">
+						    
+						   <button class="btn btn-success" id='submit' onclick='formCheck();'>수정</button>
+						   
+						   <button class="btn btn-success btn2 moveMainBtn" href="#carousel-example-generic" data-slide="prev">
+									<span class="glyphicon glyphicon-remove"></span>취소
+								</button>
+						    
+						    <button class="btn btn-default btn2 prevBtn" href="#carousel-example-generic" data-slide="prev">
+								  <span class="glyphicon glyphicon-chevron-left"></span>취미
+								</button>
+						  </div>
+						  <label id='file1Label' class='formCheckLabel'>사진을 등록해주세요.</label>
+						  <div class="panel panel-default">
+						 		<div class="panel-heading imgDiv2">
+						 		
+							 		<form method = 'post' enctype='multipart/form-data' id='form' action='http://14.32.7.49:4000/upload'>
+							 		
+							 			<div class='photoDiv' id='upload_file1' onclick='whereClickFileDiv(this);'></div>
+							 			<input class="file" id="file1" name='image1' type='file' multiple title="test #1"/>
+							 			
+							 			<div class='photoDiv' id='upload_file2' onclick='whereClickFileDiv(this);'></div>
+							 			<input class="file" id="file2" name='image2' type='file' multiple title="test #2"/>
+							 			
+							 			<div class='photoDiv' id='upload_file3' onclick='whereClickFileDiv(this);'></div>
+							 			<input class="file" id="file3" name='image3' type='file' multiple title="test #3"/>
+							 			
+							 			<div class='photoDiv' id='upload_file4' onclick='whereClickFileDiv(this);'></div>
+							 			<input class="file" id="file4" name='image4' type='file' multiple title="test #4"/>
+							 			
+							 			<button id='photoSubmit' type="submit"></button>
+							 		</form>
+						 		</div>	
+							 	<p>사진</p>
+						  </div>
+					  </div>
+		  		</div>
+		  </div>
+	</div>
+	
+	<ol class="carousel-indicators" style='display:none;'>
+    <li data-target="#carousel-example-generic" data-slide-to="0"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2" id='mainPage'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="3" id='cityBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="4" id='bloodBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="5" id='jobBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="6" id='faceBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="7" id='styleBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="8" id='personalityBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="9" id='hobbyBox'></li>
+	  <li data-target="#carousel-example-generic" data-slide-to="10" id='photoBox'></li>
+  </ol>
+  
+  
+  <input class="form-control input-sm" id='faceInputCount' style='display:none' value='0'>
+<input class="form-control input-sm" id='styleInputCount' style='display:none' value='0'>
+<input class="form-control input-sm" id='personalityInputCount' style='display:none' value='0'>
+<input class="form-control input-sm" id='hobbyInputCount' style='display:none' value='0'>
+
+
+<script src="/script/lib/jquery-1.11.1.js"></script>
+<script src="/script/lib/bootstrap.js"></script>
+<script src="/script/lib/bootstrap-slider.js"></script>
+<script src="/script/js/main.js"></script>
+
+</body>
+</html>

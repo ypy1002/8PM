@@ -1,0 +1,12 @@
+{
+  "name": "Chatzz",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+	"mysql": "*",
+    "express": "3.2.6",
+  }
+}

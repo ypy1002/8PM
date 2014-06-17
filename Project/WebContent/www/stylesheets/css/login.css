@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+#mainBox { padding: 4% 10%; height: 100%;}
+.form-control { margin-top: 3%; }
+.sex { height: 50px; width: 45.91%; display : inline-block;}
+#man { background-image: url("/img/man.png"); background-size : 100% 100%;}
+#woman { background-image: url("/img/woman.png"); background-size : 100% 100%; }
+.dateBox, #phoneNumber, #recievedNumber, #signin { display : inline;} 
+#signPhoneNumber, #signRecievedNumber { width: 48%;}
+#number, #complete, #signEnd { width: 43.3%; }
+#signRecievedNumber { margin-left: 6.1%; }
+label { margin-left: 6%; font-size: 80%; color : red;}
+.glyphicon { font-size : 80%;}
+#signYear , #signMonth { margin-right: 3.9%; }
+#dateLabelDiv > #signDayLabel { float: right; }
+#dateLabelDiv > #signYearLabel, #signMonthLabel { float: left; }
+#dateLabelDiv > #signMonthLabel { margin-left: 38%; }
+
+#loginBtn, #signinBtn { width: 49.02%; }
+#clock{ width : 38%; margin : 10% auto; }
+#color{text-align:center; font-weight: bold; font-size: 500%; font-family:'나눔손글씨 펜'; margin-top: -1%; margin-bottom:17%; color:seagreen;} 
+#box {width: 70%; margin : auto; }
+#anchorDiv{float:right; margin-top:5%;}
+
+#PWSearch, #IDSearch { margin-top : 20%; }
+
+h1{ font-family:'나눔손글씨 펜'; font-weight: bold; color:seagreen;}
+label { color : red; font-size : 80%;}
+#pwUpdateChk { margin-top: 5%; }
+#alldiv{width : 70%; margin : auto;}
+#idNumber, #pwNumber { margin-top: 20%; }
+#userID { border: 2px solid lightcoral; text-align: center; font-weight:bold; border-radius: 5px; }
+.nav-tabs > li { width: 50%; text-align: center; }
+.nav-tabs > li > a { border-radius: 20px 20px 0 0; color : #47A447; font-weight: bold;}
+#searchSpan, #signSpan { font-weight: bold; float: right; padding-top: 3%;}
+#back { float : right; margin-top: -2.5%;}
+
+.updateShow, label, #userID, .pwFirstHidden, .idFirstHidden' { display : none; }

@@ -1,0 +1,113 @@
+@CHARSET "UTF-8";
+
+
+html, body, .panel-body , #carousel-example-generic, .carousel, .carousel-inner, .carousel-inner > .active, .panel-success ,.panel-body{height:100%;}
+#timerInput, #choiceProfile { text-align: center; font-family:'나눔고딕코딩';color: darkcyan;}
+
+span, #timerInput { font-weight: bold; }
+.panel-footer{ position: absolute; bottom: 0; width:100%; }
+#logoutBtn{float: right;}
+#timerDiv {margin-bottom: 15%; margin-top: 5%; color: lightslategray; text-align: center;}
+#timerInput{background-color: darkseagreen;color: floralwhite;}
+.time { font-weight: bold; font-size: 150%;}
+.btn-group{margin-top: 1%; margin-left:5%; width: 100%;}
+.modal-title{font-weight: bold; font-size: 150%;}
+#localSelect{font-size: 120%;margin-top: 7%; margin-bottom:7%; color: teal;font-weight: bold; text-align: center;}
+#localBtn{width: 82%;}
+#ageSelectBaby{height: 10%; margin-top: 5%;}
+ .carousel-inner > .item,#chat, #picture, #box1  {height: 100%; width: 100%;}
+
+#picture{width:30%; height:30%;margin-top:-3%;}
+ #box1 {width:100%; height:13%}
+
+.mychat { text-align: right; }
+.joinUser { text-align: center; border-radius : 5px; background :lightgray; font-weight:bold;}
+
+#txt { width: 69%; margin-left: 5%; resize: none;margin-top: -4%; height:5%;border-radius: 5px;}
+.msgDiv { border : 1px solid; }
+.time1 { font-size : 60%; }
+#cityDiv , #ageDiv { width: 80%; margin : 0px auto;};
+#person{margin-left: 5%;margin-top: -5%;margin-top: -12%;height: 100%;}
+#timer{font-size: 350%;margin-left: 5%;}
+#txt, #btn{display:inline-block;}
+#btn{margin-left: 1%; margin-top: -6.5%; line-height: 133%; width: 19%;	}
+#after, #sos{line-height: 96%;width: 30%;}
+#after{margin-left: -31%;}
+#sos{margin-top: -19%;margin-left: 5%;}
+#box1{margin-top: 5%;}
+#header{width: 100%;height: 7%;background-color:#DFF0D8;text-align:center;}
+#txtarea{margin-left: 5%;margin-top:2%; }
+.panel-body {padding: 0px;}
+.inline{display:inline-block;}
+p{margin-bottom: -5%;margin-top: 5%;font-weight:bold; color:red;text-align: center;border-radius: 5px;background: none repeat scroll 0% 0% lightgray;}
+.abcd{margin-bottom:-10%;}
+#okok{margin-left: -31%;line-height: 96%;width: 14.5%;}
+#nono{margin-left: 0%;line-height: 96%;width: 14.5%;}
+#wait{margin-left: -22%;margin-right: 5%;}
+#blind{margin-top:-6%; margin-left:5%;display:block; width:95%;height:53%;}
+.modal-body {position: relative;padding: 34px 66px;height: 100%;}
+#SOSOK{width:48%;background-color:#4CAE4C;}
+#SOSCANCLE{width:48%;background-color:#FF6464;}
+#sos2{height: 8%;line-height: 2.5em;font-weight: bold;font-size: 110%;background-color:#dff0d8;text-align: center;}
+#back{margin-right: 61%;margin-top: -0.2%;}
+h5{text-align: center;font-weight: bold;margin-top: 7%;}
+#inputText{background-color: #FAFAD2;width:95%;resize: none; margin: 0% 2.5%;border: solid #D3D3D3;border-radius:5px;height: 58%;}
+#inputText:focus{ -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(98, 196, 98, 0.6); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(98, 196, 98, 0.6); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(98, 196, 98, 0.6);}
+.popover-content {padding: 9px 14px; color: gray; font-weight: bold;}
+#bbb{text-align:center; font-weight:bold; font-size:100%;height: 5%;} 
+#button { text-align: center;}
+.form-control { margin-bottom: 2%; }
+#cityModalClose { overflow: hidden; }
+.matchCityBtn { width: 32.445%; }
+button.btn.btn-default.matchCityBtn { margin-bottom: 2%; }
+
+
+h2.panel-title {font-size: 180%;}
+#sosText { text-align: center; }
+html, body, .panel-success, .panel-body, .carousel, .carousel-inner, .carousel-inner > .item, .panel-info , .panel-default { height: 100%; }
+.panel-body { padding : 0px; }
+.imgDiv, .imgDiv2 { height:42%; background-size : 100% 100%;}
+h3 { line-height: 2.1; }
+
+
+.formCheckLabel { color : red; }
+p { text-align: center; font-weight: bold; font-size: 120%; }
+.photoDiv {display: inline-block; height: 50%; width: 49.2%; }
+.panel-success > .panel-heading { height: 55px; }
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {color: black;background-color: white;border-color: #ccc;}
+
+
+
+
+
+
+
+.moveChatBtn { float: right; }
+.cityBtn { width : 32.29%; margin-bottom: 4px; height: 7%; }
+.bloodBtn { width : 49.2%; margin-bottom: 4px; }
+#txtarea { height: 65%; width: 90%; background-color: lightgoldenrodyellow; border : lightgray solid 2px; overflow : hidden;border-radius : 5px; padding: 5px;}
+.mychtting { background-image: url("/img/meChat.png"); background-size : 100% 100%; padding:3%;}
+.yourchtting { background-image: url("/img/youChat.png"); background-size : 100% 100%; padding: 3%;}
+
+
+
+
+#form { height: 100%;}
+.photoDiv { background-image: url("/img/photo.png"); background-size : 100% 100%;}
+#cityImg { background-image: url("/img/city.jpg");}
+#bloodImg { background-image: url("/img/blood.jpg");}
+#jobImg { background-image: url("/img/job.jpg");}
+#faceImg { background-image: url("/img/face.jpg");}
+#styleImg { background-image: url("/img/style.jpg");}
+#personalityImg { background-image: url("/img/personality.png");}
+#hobbyImg { background-image: url("/img/hobby.jpg");}
+
+
+
+.btn2 { float: left; }
+#submit { float: right; }
+.nextBtn, .prevBtn { width: 25%;}
+.moveMainBtn { margin-right: 6%; }
+.bloodBtn2 { margin-left: 25%;}
+input { margin-bottom: 4px; }
+label { color : red; font-size : 80%; }
