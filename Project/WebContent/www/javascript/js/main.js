@@ -38,15 +38,12 @@ $(function() {
 		  if(blindPhoto - (blindHeight/100)*data >= 0 && blindPhoto - (blindHeight/100)*data <= 12.8){
 			  $('#blind').css('height', blindPhoto - (blindHeight/100)*data + '%');
 		      blindPhoto = blindPhoto - (blindHeight/100)*data;
-		      console.log(blindPhoto);
 		  }else if(blindPhoto - (blindHeight/100)*data < 0){
 			  $('#blind').css('height', '0%');
 			  blindPhoto = 0;
-			  console.log(blindPhoto);
 		  }else if(blindPhoto - (blindHeight/100)*data > 12.8){
 			  $('#blind').css('height', '12.8%');
 			  blindPhoto = 12.8;
-			  console.log(blindPhoto);
 		  }
 	});
 	
@@ -289,7 +286,7 @@ $(function() {
 		data.message = data.message.replace(/\r\n/g, '<br>');
 		data.message = data.message.replace(/\n/g, '<br>');
 		data.message = data.message.replace(/\r/g, '<br>');
-		console.log(myData.userData[0].ID);
+		
 		//채팅 말풍선 여러줄적용시키기!!2014.06.18
 		if (myData.userData[0].ID == data.userid) {
 			$('#txtarea').append(
@@ -349,11 +346,12 @@ function timer() {
 	
    var minute = 1;
    var second = 10;
-   var miliSecond = 55;
+   var miliSecond = 99;
+   var mileCheck = 0;
    var aaa = setInterval(function(){
 	   
-	   if(minute == 0 && second == -1){
-		   second = "aaa";
+	   if(minute == 0 && second == 00){
+		   mileCheck = 1;
 		   clearInterval(aaa);
 	   }
 	   
@@ -374,13 +372,12 @@ function timer() {
 			   
 			   $('.timerDiv2').append('<span id="miliSpan">' + ':' + miliSecond + '</span>');
 			   
-			   if(minute == 0 && second == "aaa" && miliSecond === "00"){
-				   console.log('asd');
+			   if(mileCheck == 1 && miliSecond == 0){
 				   clearInterval(bbb);
 			   }
 			   
 			   if(--miliSecond < 0){
-				   miliSecond = 55;
+				   miliSecond = 99;
 			   };
 		   }, 10);
 	   }
@@ -388,16 +385,12 @@ function timer() {
 	   if(--second < 0 && minute != 0 ){
 		   minute--;
 		   second = 59;
-	   }else if(minute == 0 && second == -1){
-		   second = 0;
 	   }
 	   
 	   if(second < 10){
 		   second = "0" + second;
 	   }
 	   
-	   
-	
   }, 1000);
 }
 
@@ -585,7 +578,6 @@ function sosTextLengthCheck(sosText){
 	}else if(sosTextLength == 0){
 		$('#abc').addClass('disabled');
 	}else{
-		console.log("asdasd");
 		$('#abc').addClass('disabled');
 		$('#sosTextLength').html(sosTextLength).css('color','red');
 		$('#inputTextLabel').css('display','');
@@ -595,7 +587,6 @@ function sosTextLengthCheck(sosText){
 function helpMe(sosYesNo){
 	
 	if($('#' + sosYesNo.id).html() == '예'){
-		console.log($('#inputText').val());
 		var i = $('#txtarea>div');
 		var chatText = "";
 		
