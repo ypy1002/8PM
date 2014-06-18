@@ -11,12 +11,8 @@ span { font-weight: bold; }
 #localBtn{width: 82%;}
 #cityDiv , #ageDiv { width: 80%; margin : 0px auto;};
 
-@font{
-	font-family: '나눔손글씨붓체';
-	src:'/style/lib/나눔손글씨붓체.apk';
-}
-
-body{font-family:'나눔손글씨붓체';}
+@font-face{font-family:'해움상상'; src:url('/style/lib/해움상상.eot')}
+body{font-family:'해움상상';}
 /* 메인 끝이에용 */
 
 
