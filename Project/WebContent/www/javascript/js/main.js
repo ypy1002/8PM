@@ -290,20 +290,21 @@ $(function() {
 		data.message = data.message.replace(/\n/g, '<br>');
 		data.message = data.message.replace(/\r/g, '<br>');
 		console.log(myData.userData[0].ID);
+		//채팅 말풍선 여러줄적용시키기!!2014.06.18
 		if (myData.userData[0].ID == data.userid) {
 			$('#txtarea').append(
 					'<br><div class="mychat"><span class="time1">' + when
 							+ ' ' + hour + ' : ' + minute + ' '
-							+ '</span><span class="mychtting">' + data.message);
+							+ '</span><div class="mychtting">' + data.message);
 			var textarea = $('#txtarea');
 			textarea[0].scrollTop = textarea[0].scrollHeight;
 			$('#txt').val('').focus();
 		} else {
 			$('#txtarea').append(
-					'<div>'+ '<div class="abcd">' + data.userid + '</div>'
-							+ '<span class="yourchtting">' + data.message
-							+ '</span><span class="time1"> ' + when + ' ' + hour
-							+ ' : ' + minute);
+					'<div class="youchatInline">'+ '<div class="abcd">' + data.userid + '</div>'
+							+ '<div class="yourchtting">' + data.message + '</div></div>' 
+							+ '<span class="time1"> ' + when + ' ' + hour
+							+ ' : ' + minute) + '</span>';
 			var textarea = $('#txtarea');
 			textarea[0].scrollTop = textarea[0].scrollHeight;
 		}

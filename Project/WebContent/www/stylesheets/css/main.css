@@ -62,8 +62,13 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 #phoneNum{padding: 1%;width: 157%;font-size:87%; font-weight:bold;}
 #scoreDiv { margin-bottom: 2%;}
 .score {width: 24.1%;}
-.mychtting { background-image: url("/img/meChat.png"); background-size : 100% 100%; padding:2%; font-size : 80%;}
-.yourchtting { background-image: url("/img/youChat.png"); background-size : 100% 100%; padding: 2%; font-size : 80%;}
+.youchatInline{display:inline;}
+.mychtting {text-align: left;float: auto;white-space: pre-wrap;overflow: hidden;width:auto; display:inline-block;
+			word-wrap:break-word; max-width: 75%;background-image: url("/img/meChat.png"); background-size : 100% 100%;
+		    padding:3%; font-size : 80%;}
+.yourchtting {text-align: left;white-space: pre-wrap; float: auto; overflow: hidden;width:auto;display:inline-block;
+			  word-wrap:break-word;max-width: 75%;background-image: url("/img/youChat.png"); background-size : 100% 100%; 
+			  padding: 3%; font-size : 80%;}
 .mychat { text-align: right; }
 .joinUser { text-align: center; border-radius : 5px; background :lightgray; font-weight:bold; font-size: 80%;}
 .abcd{margin-bottom: 1%; margin-top: 3%; font-size: 80%;}
@@ -75,6 +80,10 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 .timerDiv2 { font-size: 270%; }
 .timerP { line-height: 0px; background-color: none; margin: 0px; color : black; text-align: left;}
 
+/*width:auto;display:inline-block; : 글자길이에 따라 말풍선 조절 
+float: auto;margin-left: 60%;white-space:nowrap; : enter쳤을때 다음 말풍선 겹치지 않게
+word-wrap:break-word; height:10%;max-width: 40%; : width크기에 따라 줄이바뀌고 바뀔때 단어가 잘리지 않도록해줌 
+ */
 /* 채팅 끝이에용 */
 
 
