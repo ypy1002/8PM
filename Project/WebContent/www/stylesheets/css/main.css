@@ -47,8 +47,15 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 
 
 /* 채팅이에용 */
-
-#txtarea { height: 60%; background-color: lightgoldenrodyellow; border : lightgray solid 2px; overflow : hidden;border-radius : 5px; padding: 15px 10px;}
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-button {  background-color: #ffffff; }
+::-webkit-scrollbar-track {  background-color: #ffffff;}
+::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #ffffff; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #ffffff;}}
+::-webkit-resizer { background-color: #ffffff;}
+#txtarea {overflow:hidden; 
+ height: 60%; background-color: lightgoldenrodyellow; border : lightgray solid 2px;border-radius : 5px; padding: 15px 10px; }
 #txt { width: 78%; resize: none; margin-top: -4%; height:4.1%; border-radius: 5px;}
 #btn{margin-top: -5%; line-height: 94%; width: 20%;}
 #header{width: 100%;height: 7%;background-color:#DFF0D8;text-align:center;}
@@ -65,10 +72,10 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 .youchatInline{display:inline;}
 .mychtting {text-align: left;float: auto;white-space: pre-wrap;overflow: hidden;width:auto; display:inline-block;
 			word-wrap:break-word; max-width: 75%;background-image: url("/img/meChat.png"); background-size : 100% 100%;
-		    padding:3%; font-size : 80%;}
+		    padding:7% 3% 3% 3%; font-size : 80%;}
 .yourchtting {text-align: left;white-space: pre-wrap; float: auto; overflow: hidden;width:auto;display:inline-block;
 			  word-wrap:break-word;max-width: 75%;background-image: url("/img/youChat.png"); background-size : 100% 100%; 
-			  padding: 3%; font-size : 80%;}
+			  padding:7% 3% 3% 3%; font-size : 80%;}
 .mychat { text-align: right; }
 .joinUser { text-align: center; border-radius : 5px; background :lightgray; font-weight:bold; font-size: 80%;}
 .abcd{margin-bottom: 1%; margin-top: 3%; font-size: 80%;}
