@@ -115,7 +115,7 @@ function inputLengthCheck(target){
 	for(var i=0; i<formCheckList.length; i++){
 		var status = Form_Chk(formCheckList[i]);
 		if(status == false){
-			$('#' + formCheckList[i].id).focus(); 
+			$('#' + formCheckList[i].id).focus();
 			return false;
 		}
 	}
@@ -144,6 +144,17 @@ function inputLengthCheck(target){
 				}, function(data){
 					toast(data);
 					$('#nextBtn').click();
+					$('.has-success').removeClass('has-success').addClass('has-default');
+					$('.has-error').removeClass('has-error').addClass('has-default');
+					$('.checkInput').val('');
+					$('label').html('').css('display','none');
+					$('.glyphicon-ok').css('display', 'none');
+					$('.glyphicon-asterisk').css('display', '').css('color','black');
+					$('.sex').css('background-color','white');
+					$('#signPhoneNumber').removeAttr('readonly');
+					$('#signEnd').css('display','none');
+					$('#number').css('display','').html('인증번호받기');
+					
 		 	    });
 		}else{
 			setTimeout('sendNumber();', 1000);
