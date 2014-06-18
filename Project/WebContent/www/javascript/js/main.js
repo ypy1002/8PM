@@ -1,9 +1,15 @@
+/*$(document).ready(function(){
+	$('#chat').css('height' ,  $(window).height()-100);
+	$('#chat').resize(function() {
+		$('html').css('height' ,  $(window).height()-100);
+	});
+});
+*/
 var myData = 0;
 var chatStatus = 0;
 var socket = io.connect('http://localhost:4000');
 var blindHeight = 12.8;
 var blindPhoto = 12.8;
-
 //toast 2014.06.17
 var toast = function(msg){
 	   $("<div><div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h4><span class='glyphicon glyphicon-heart'></span>&nbsp"+msg+"</h4></div></div> ")

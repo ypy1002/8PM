@@ -11,7 +11,12 @@ span { font-weight: bold; }
 #localBtn{width: 82%;}
 #cityDiv , #ageDiv { width: 80%; margin : 0px auto;};
 
+@font{
+	font-family: '나눔손글씨붓체';
+	src:'/style/lib/나눔손글씨붓체.apk';
+}
 
+body{font-family:'나눔손글씨붓체';}
 /* 메인 끝이에용 */
 
 
@@ -48,13 +53,13 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 
 /* 채팅이에용 */
 ::-webkit-scrollbar { width: 3px; height: 3px;}
-::-webkit-scrollbar-button {  background-color: #ffffff; }
-::-webkit-scrollbar-track {  background-color: #ffffff;}
+::-webkit-scrollbar-button {  background-color: #666; }
+::-webkit-scrollbar-track {  background-color: #999;}
 ::-webkit-scrollbar-track-piece { background-color: #ffffff;}
-::-webkit-scrollbar-thumb { height: 50px; background-color: #ffffff; border-radius: 3px;}
-::-webkit-scrollbar-corner { background-color: #ffffff;}}
-::-webkit-resizer { background-color: #ffffff;}
-#txtarea {overflow:hidden; 
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #999;}}
+::-webkit-resizer { background-color: #666;}
+#txtarea {overflow:auto; 
  height: 60%; background-color: lightgoldenrodyellow; border : lightgray solid 2px;border-radius : 5px; padding: 15px 10px; }
 #txt { width: 78%; resize: none; margin-top: -4%; height:4.1%; border-radius: 5px;}
 #btn{margin-top: -5%; line-height: 94%; width: 20%;}
