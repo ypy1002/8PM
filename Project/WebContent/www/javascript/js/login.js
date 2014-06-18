@@ -115,7 +115,7 @@ function inputLengthCheck(target){
 	for(var i=0; i<formCheckList.length; i++){
 		var status = Form_Chk(formCheckList[i]);
 		if(status == false){
-			$('#' + formCheckList[i].id).focus();
+			$('#' + formCheckList[i].id).focus(); 
 			return false;
 		}
 	}
