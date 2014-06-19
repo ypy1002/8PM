@@ -388,60 +388,26 @@ app.post('/updatePw', function(req, res){
 
 app.post('/upload', multipartMiddleware, function(req, res){
 	
-	var imglist = [req.files.image1, req.files.image2, req.files.image3, req.files.image4];
+	console.log(req.files);
 	
 		var dataNow = Date.now();
 		var writePath = "D:\\8pm\\Project\\Server\\multipart\\" + dataNow + "_";
+		var type = req.files.file.type.split('/')[1];
+		console.log(type);
 		
-		if(imglist[0].type.split('/')[0] == 'image'){
-			
-			fs.readFile(imglist[0].path, function(error, data){
-				fs.writeFile(writePath + imglist[0].name , data, function(error){
-					if(error){
-						console.log(error);
-					}
-				});
+		fs.readFile(req.files.file.path, function(error, data){
+			fs.writeFile(writePath + req.files.file.name + '.' + type, data, function(error){
+				if(error){
+					console.log(error);
+				}
 			});
-		};
-		
-		if(imglist[1].type.split('/')[0] == 'image'){
-			
-			fs.readFile(imglist[1].path, function(error, data){
-				fs.writeFile(writePath + imglist[1].name , data, function(error){
-					if(error){
-						console.log(error);
-					}
-				});
-			});
-		};
-		
-		if(imglist[2].type.split('/')[0] == 'image'){
-			
-			fs.readFile(imglist[2].path, function(error, data){
-				fs.writeFile(writePath + imglist[2].name , data, function(error){
-					if(error){
-						console.log(error);
-					}
-				});
-			});
-		};
-		
-		if(imglist[3].type.split('/')[0] == 'image'){
-			
-			fs.readFile(imglist[3].path, function(error, data){
-				fs.writeFile(writePath + imglist[3].name , data, function(error){
-					if(error){
-						console.log(error);
-					}
-				});
-			});
-		};
-		
+		});
+/*		
 		connection.query('insert into photo (UNO, PHOTO_NO, PHOTO) values(' + LoginUserUNO + ',1,"' + dataNow + '_' + imglist[0].name +  '"),('
 																			+ LoginUserUNO + ',2,"' + dataNow + '_' + imglist[1].name +  '"),('
 																			+ LoginUserUNO + ',3,"' + dataNow + '_' + imglist[2].name +  '"),('
 																			+ LoginUserUNO + ',4,"' + dataNow + '_' + imglist[3].name +  '")'
-																			, function(err, rows, fields){console.log('upload end');});
+																			, function(err, rows, fields){console.log('upload end');});*/
 });
 
 
