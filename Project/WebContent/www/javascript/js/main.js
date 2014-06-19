@@ -218,21 +218,25 @@ $(function() {
 		$('#phoneNum').css('font-size','120%').html(youData.unoTel[0].TEL);
 	});
 
+	
+	
+	
 	socket.on('join', function(data) {
 		var divLength = $('#txtarea>div');
 
 		if (divLength[0] == undefined) {
 			$('#txtarea').append(
-					'<div class="joinUser"><span>' + data.userData.id + '님이 입장하셨습니다.');
+					'<div class="joinUser"><span>' + data.userData.id + '님이 입장하셨습니다.</div><br><div class="alarm">채팅은 10분동안만 진행됩니다! 호감도를 표시하는 만큼 상대방에게 회원님의 사진이 보여질수도, 가려질수도 있어요!</div>' );
 		} else {
 			youData = data.userData;
 			$('#txtarea').append(
 					'<br><div class="joinUser"><span>' + data.userData.id
-							+ '님이 입장하셨습니다.');
+							+ '님이 입장하셨습니다.</div><br><div class="alarm">채팅은 10분동안만 진행됩니다! 호감도를 표시하는 만큼 상대방에게 회원님의 사진이 보여질수도, 가려질수도 있어요!</div>');
 			$('#person').removeAttr('src').attr('src','/imgData/'+ data.userData.photo[0].PHOTO );
 			socket.emit('startTimer');
 		}
 	});
+	
 	
 	socket.on('startTimer', function(data){
 		if(data){
@@ -255,7 +259,25 @@ $(function() {
 	 });
 	
 
-	
+
+/////////////////////////////////채팅 메세지 저장///////////////////
+/*$('#btn').click(function() {
+if ($('#txt').val().length != 0) {
+$.post('/chat_message', {
+myUNO : myData.userData[0].UNO,
+youUNO : youData.unoTel[0].UNO,
+message : $('#txt').val()
+},
+function(data){
+console.log(data + "msg_no");
+socket.emit('message', {
+"userid" : $('#userid').val(),
+"message" : $('#txt').val(),
+
+});
+});
+}
+});*/
 	$('#btn').click(function() {
 		if ($('#txt').val().length != 0) {
 			socket.emit('message', {
