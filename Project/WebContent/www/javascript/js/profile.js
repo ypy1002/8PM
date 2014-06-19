@@ -17,10 +17,6 @@ $(function(){
 	
 });
 
-function aaa(){
-	alert('asasd');
-}
-
 function whereClickFileDiv(clickDiv){
 	$('#file' + clickDiv.id.substr(clickDiv.id.length-1)).click();
 }
@@ -64,7 +60,7 @@ function formCheck(){
 					return false;
 				}
 				
-			}else if(inputAll[i].id != 'city1' && inputAll[i].id != 'blood1' && $('#' + inputAll[i].id).val().length < 10 && $('#' + inputAll[i].id).val().length > 0){
+			}else if(inputAll[i].id != 'city1' && inputAll[i].id != 'blood1' && $('#' + inputAll[i].id).val().length < 5 && $('#' + inputAll[i].id).val().length > 0){
 				$('#' + inputAll[i].id.substr(0, inputAll[i].id.length-1) + 'Box').click();
 				$('#' + inputAll[i].id).focus();
 				return false;
@@ -80,7 +76,7 @@ function formCheck(){
 					$('#' + inputAll[i].id.substr(0, inputAll[i].id.length-1) + 'Box').click();
 					$('#' + inputAll[i].id).focus();
 					return false;
-				}else if($('#' + inputAll[i].id).val().length < 10 && $('#' + inputAll[i].id).val().length > 0){
+				}else if($('#' + inputAll[i].id).val().length < 5 && $('#' + inputAll[i].id).val().length > 0){
 					$('#' + inputAll[i].id.substr(0, inputAll[i].id.length-1) + 'Box').click();
 					$('#' + inputAll[i].id).focus();
 					return false;
@@ -180,8 +176,8 @@ function eventonkeypress(id) {
     	$(id + 'Label').html('필수 입력항목입니다!').css('display', '').css('color', 'red');
     	$(id + 'Div').removeClass('has-warning has-feedback');
     	$(id + 'Div').addClass('has-error has-feedback');
-    }else if($(id).val().length > 0 && $(id).val().length < 10){
-    	$(id + 'Label').html('10자 이상 적어주세요!').css('display', '').css('color','#996633');
+    }else if($(id).val().length > 0 && $(id).val().length < 5){
+    	$(id + 'Label').html('5자 이상 적어주세요!').css('display', '').css('color','#996633');
     	$(id + 'Div').removeClass('has-error has-feedback');
     	$(id + 'Div').addClass('has-warning has-feedback');
     }else{
