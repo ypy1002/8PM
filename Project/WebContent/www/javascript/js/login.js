@@ -78,6 +78,7 @@ function statusEvent(target, labelHTML, status){
 		$('#' + target.id + 'Typo').css('color','#a94442').css('display', '');
 		$('#' + target.id + 'Label').html(labelHTML).css('display', '');
 	}else if(status == 'success'){
+		console.log(target.id);
 		$('#' + target.id + 'Div').removeClass('has-warning').addClass('has-success');
 		$('#' + target.id + 'Label, #' + target.id + 'Typo').css('display', 'none');
 		$('#' + target.id + 'TypoSuccess').css('color','#3c763d').css('display', '');
@@ -87,9 +88,9 @@ function statusEvent(target, labelHTML, status){
 		$('#' + target.id + 'TypoSuccess').css('color','#3c763d').css('display', '');
 	}else if(status == 'warning'){
 		$('#' + target.id + 'Div').removeClass('has-error', 'has-success').addClass('has-warning');
+		$('#' + target.id + 'Label').html(labelHTML).css('display', "");
 		$('#' + target.id + 'TypoSuccess').css('display', 'none');
 		$('#' + target.id + 'Typo').css('color','#66512c').css('display', '');
-		$('#' + target.id + 'Label').html(labelHTML).css('display', "");
 	}
 }
 
@@ -255,14 +256,16 @@ function checkPwConfirm(target){
 		statusEvent(target, "", "success2");
 	}
 }
-
+//////////////////////////////////////////////ㅁㄴㅇㄹ;ㅣ마너린ㅁ;럼ㄴㅇㄹ////
 function checkName(target){
 	$('#' + target.id).val($('#' + target.id).val().replace(/[a-z0-9]/gi,''));
 	
+	console.log($('#' + target.id).val());
 	if($('#' + target.id).val().length < 2){
 		statusEvent(target, 2 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
 		return false;
 	}else{
+		console.log('success');
 		statusEvent(target, "", "success");
 	}
 }

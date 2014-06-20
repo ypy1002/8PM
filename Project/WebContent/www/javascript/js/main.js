@@ -19,7 +19,7 @@ var toast = function(msg){
 	      "text-align": "center",
 	      border: "1px solid #FFC091",
 	      width: "70%",
-	      height: "6%",
+	      height: "10%",
 	      color: "white",
 	      "background-color": "#FFC091",
 	      "border-radius": "5px",
@@ -34,6 +34,16 @@ var toast = function(msg){
 	};
 //toast 2014.06.17 여기까지
 $(function() {
+	
+	$("#localSelecter").selecter();
+	
+	for(var i=20; i<=60; i++){
+		$('#ageMinSelecter, #ageMaxSelecter').append('<option value=' + i + ' >' +  i + '</option>');	
+	}
+	$("#ageMinSelecter").selecter();
+	$("#ageMaxSelecter").selecter();
+	
+	
 	
     $('.score').click(function(){
        socket.emit('viewPhoto',(this.id).split('_')[1]);
@@ -53,15 +63,15 @@ $(function() {
 		  }
 	});
 	
-	$('#select').slider();
+//	$('#select').slider();
 	
-	$('.slider-handle').on({'mousemove': function(){
+/*	$('.slider-handle').on({'mousemove': function(){
 		$('#minAge').html($('.tooltip-inner').html().split(' : ')[0]);
 		$('#maxAge').html($('.tooltip-inner').html().split(' : ')[1]);
 	}, 'mouseup': function(){
 		$('#minAge').html($('.tooltip-inner').html().split(' : ')[0]);
 		$('#maxAge').html($('.tooltip-inner').html().split(' : ')[1]);
-	}});
+	}});*/
 		
 	
 	$('.carousel').carousel({
@@ -112,13 +122,9 @@ $(function() {
 				$('#style' + (i+1)).val(data.style[i].STYLE);
 				$('#personality' + (i+1)).val(data.ct[i].CT);
 				$('#hobby' + (i+1)).val(data.hobby[i].HOBBY);
-				$('#upload_file' + (i+1)).css({'background-image': ('url(/imgData/'+data.photo[i].PHOTO+')'), 'background-size': '100% 100%' });
 			}
 			
 			if(i > 2){
-				if(i == 3){
-					$('#upload_file' + (i+1)).css({'background-image': ('url(/imgData/'+data.photo[i].PHOTO+')'), 'background-size': '100% 100%' });
-				}
 				
 				if(data.face[i].FACE != ''){
 					$('#facePlus').click();
@@ -161,14 +167,21 @@ $(function() {
 	timer2();
 	
 	$('#waitBtn').click(function(){
-		$.post('/updateMatching', {
-			uno : myData.userData[0].UNO,
-			city : $('#cityInput1').val(),
-			minage : $('#minAge').html(),
-			maxage : $('#maxAge').html()
-		}, function(data){
-			toast(data);	
-		});
+		target = $('.matching_profile');
+	
+		if(target[1].options[target[1].selectedIndex].text <= target[2].options[target[2].selectedIndex].text){
+			$.post('/updateMatching', {
+				uno : myData.userData[0].UNO,
+				city : target[0].options[target[0].selectedIndex].text,
+				minage : target[1].options[target[1].selectedIndex].text,
+				maxage :target[2].options[target[2].selectedIndex].text
+			}, function(data){
+				toast(data);	
+			});
+	  }else{
+		  toast('최소나이가 최대나이보다 클 수 없습니다 재설정해주세요');
+		  return false;
+	  }
 	});
 	
 	
@@ -431,12 +444,23 @@ function format(n) {
 	return zero + n;
 }
 
-function cityCheck(choiceCity){
-	$('.selectedCity').html(choiceCity);
+
+//매칭상대의 지역선택했을때 
+/*function cityCheck(choiceCity){
 	$('#cityInput1').val(choiceCity);
+	//console.log($('#cityInput1').val());
+	$('.selectedCity').html(choiceCity);
 	$('#cityModalClose').click();
 }
 
+function minAgeCheck(choiceMinAge){
+	$('#ageMinSelecter').val(choiceMinAge);
+}
+
+function maxAgeCheck(choiceMaxAge){
+	$('#ageMaxSelecter').val(choiceMaxAge);
+}
+*/
 function CityAndBloodCheck(menu, choice){
 	if(menu == "city"){
 		$('.cityBtn').css('background','').css('color', '');

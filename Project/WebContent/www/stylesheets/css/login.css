@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+.btn-success, .btn-success:hover, .btn-success:focus{background-color:#48CFAD;border-color: #48CFAD;}
 #mainBox { padding: 4% 10%; height: 100%;}
 .form-control { margin-top: 3%; }
 .sex { height: 50px; width: 45.91%; display : inline-block;}

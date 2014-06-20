@@ -4,7 +4,7 @@ var myData;
 $(function(){
 	
 	$.getJSON('/getUserProfile', function(data){
-		console.log(data);
+		//console.log(data);
 		myData = data;
 	});
 	

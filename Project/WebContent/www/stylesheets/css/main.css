@@ -1,18 +1,19 @@
 /* 메인이에용 */
-
+.btn-success, .btn-success:hover, .btn-success:focus{background-color:#48CFAD;border-color: #48CFAD;}
 html , body, .panel-body,#carousel-example-generic, .carousel, .carousel-inner, .carousel-inner > .active, .panel-success ,.panel-body, .carousel-inner > .item,#chat  {height: 100%; width: 100%;}
 html, body, .panel-success, .panel-body, .carousel, .carousel-inner, .carousel-inner > .item, .panel-info , .panel-default { height: 100%; }
 #timerDiv {margin-bottom: 15%; margin-top: 5%; color: lightslategray; text-align: center;}
 span { font-weight: bold; }
 .panel-footer{  position: absolute; bottom: 0;  width:100%; }
-#logoutBtn{float: right;}
+#logoutBtn{float: right; background-color: #48CFAD;border-color: #48CFAD; color:white;}
 .time { font-weight: bold; font-size: 150%;}
 #localSelect{font-size: 120%;margin-top: 7%; margin-bottom:7%; color: teal;font-weight: bold; text-align: center;}
 #localBtn{width: 82%;}
 #cityDiv , #ageDiv { width: 80%; margin : 0px auto;};
-
-@font-face{font-family:'해움상상'; src:url('/style/lib/해움상상.eot')}
-body{font-family:'해움상상';}
+.ageInline, #ageMinSelecter, #ageMaxSelecter{display:inline-block;}
+.ageInline{width:30%;font-size: 120%;font-weight: bold;display: inline-block;vertical-align: bottom;margin-left: 6%;}
+#waitBtn, #chatBtn{width: 60%;margin-left: 34%;}
+#abc{background-image:url('/img/abc.jpg'); background-size:100% 100%;}
 /* 메인 끝이에용 */
 
 
@@ -41,7 +42,7 @@ label { color : red; font-size : 80%; }
 .nextBtn, .prevBtn { width: 25%;}
 .bloodBtn2 { margin-left: 25%;}
 .moveChatBtn { float: right; }
-p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;background: none repeat scroll 0% 0% lightgray; color:red; }
+.profileheader { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;background: none repeat scroll 0% 0% lightgray; color:red; } 
 
 /* 프로필 끝이에용 */
 
@@ -87,7 +88,7 @@ p { text-align: center; font-weight: bold; font-size: 100%; border-radius: 5px;b
 #okok, #nono { line-height: 100%; }
 .timerDiv2 { font-size: 270%; }
 .timerP { line-height: 0px; background-color: none; margin: 0px; color : black; text-align: left;}
-
+.alarm{border-radius: 3%;border: 2px solid lightcoral;padding: 1% 6%;font-size:90%;font-weight: bold;}
 /*width:auto;display:inline-block; : 글자길이에 따라 말풍선 조절 
 float: auto;margin-left: 60%;white-space:nowrap; : enter쳤을때 다음 말풍선 겹치지 않게
 word-wrap:break-word; height:10%;max-width: 40%; : width크기에 따라 줄이바뀌고 바뀔때 단어가 잘리지 않도록해줌 

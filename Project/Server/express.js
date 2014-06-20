@@ -119,6 +119,32 @@ io.sockets.on('connection', function(socket){
 	   });
 });
 
+
+/////////////////////////////////채팅 메세지 저장///////////////////
+/*app.post('/chat_message', function(req, res){
+	var date = new Date();
+	var send_date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' 
+
++ date.getDate();
+	  connection.query('select  UNO_A, UNO_B from matching where   '); 
+	
+	  connection.query('insert into MSG(UNO_A, UNO_B, WT_PSNO, CONTENT, 
+
+SEND_DATE) values (' + req.param('myUNO')  + "," +
+				         req.param('youUNO') + "," +req.param
+
+('myUNO') +",'" +req.param('message') + "','" + send_date + "')");
+	   
+	  connection.query('select MSG_NO from msg where UNO_A='+ req.param
+
+('myUNO') +' and UNO_B='+ req.param('youUNO') + " and CONTENT='" + req.param
+
+('message') + "' limit=1" , function(err, msg_no, fields){
+	    	
+	    	res.send(msg_no);
+	    });
+		
+});*/
 app.post('/sos', function(req, res){
 	
 	var date = new Date();
@@ -315,7 +341,7 @@ app.post('/updateMatching', function(req, res){
 	});
 });
 
-app.get('/getUserProfile', function(req, res){
+app.get('/getUserProfile', function(req, res){	
 	connection.query('select UNO, ID, TEL, CITY, MIN_AGE, MAX_AGE from users where UNO=' + LoginUserUNO, function(err, userData, fields){
 		connection.query('select FACE from face where UNO=' + userData[0].UNO , function(err, face, fields) {
 			connection.query('select STYLE from style where UNO=' + userData[0].UNO , function(err, style, fields) {

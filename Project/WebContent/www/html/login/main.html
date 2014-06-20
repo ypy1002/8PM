@@ -5,8 +5,12 @@
 <title>Insert title here</title>
 <script src='http://localhost:4000/socket.io/socket.io.js'></script>
 <link rel="stylesheet" href="/style/lib/bootstrap.css"/>
-<link rel='stylesheet' href='/style/lib/slider.css' />
+<!-- <link rel='stylesheet' href='/style/lib/slider.css' /> -->
 <link rel='stylesheet' href='/style/css/main.css' />
+<link href="/style/lib/jquery.fs.selecter.css" rel="stylesheet">
+
+
+
 
 </head>
 <body>
@@ -107,52 +111,44 @@
 		            </div>
 		  </div>
 		
-		
+  		
 				<div class="item active">
 				<input type="text" id='cityInput1' style='display: none;'>
-				  	<div class="panel-body">
+				  	<div class="panel-body"  id='abc'>
 							<div id='timerDiv'></div>
+<!-- ㅇ리ㅏ머오라ㅣㅓㅁㄴ올마니얾;ㅣㄴ얼ㄴ밍;ㅏ럼니아ㅓㄻ;ㄴ이ㅏ러민ㅇ;ㅏ러미나럼ㄴ이ㅏ러ㅣ나ㅓ -->  
 							<div id='localSelect'>원하는 상대의 프로필 설정 </div>
-							<div id='cityDiv'>
-							<span>지역 : </span><button id='localBtn' class="btn btn-success selectedCity" data-toggle="modal" data-target="#cityModalClose"></button>
-							</div>
-							<div class="modal fade" id="cityModalClose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-				   		 	  <div class="modal-content">
-				      				<div class="modal-body">
-        								<button type="button" id='cityModalClose' class="close" data-dismiss="modal" aria-hidden="true" style='display:none'>&times;</button>
-				        				<button class="btn btn-default matchCityBtn" onclick='cityCheck("서울");'>서울</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("부산");'>부산</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("인천");'>인천</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("광주");'>광주</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("대전");'>대전</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("대구");'>대구</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("울산");'>울산</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("경기");'>경기</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("강원");'>강원</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("충북");'>충북</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("충남");'>충남</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("세종");'>세종</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("전북");'>전북</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("전남");'>전남</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("경북");'>경북</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("경남");'>경남</button>
-												<button class="btn btn-default matchCityBtn" onclick='cityCheck("제주");'>제주</button>
-												</div>
-					    			</div>
-					  			</div>
-								</div>
-				
-								<br><br>
-								<div id='ageDiv'>
-									<span>나이 : </span><b id='minAge'>20</b><input id="select" type="text" class="span2"	 
-					       																data-slider-min="20" data-slider-max="60" data-slider-step="1" 
-					       																data-slider-value="[20,60]"/> <b id='maxAge'>60</b>
-								</div>
-								<br>
-								<button id='waitBtn' type="button" class="btn btn-success btn-block">설정하기</button>
-								<br>
-								<button type="button" id="chatBtn" class="btn btn-success btn-block" href="#carousel-example-generic" data-slide="prev">채팅 입장</button>
+					<div id='settingBox'>		
+							<p class='ageInline '>지 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역 | </p><select class='matching_profile' id='localSelecter'>
+	        				        <option >서울</option>
+									<option>부산</option>
+									<option >인천</option>
+									<option >광주</option>
+									<option >대전</option>
+									<option >대구</option>
+									<option >울산</option>
+									<option >경기</option>
+									<option >강원</option>
+									<option >충북</option>
+									<option  >충남</option>
+									<option  >세종</option>
+									<option  >전북</option>
+									<option >전남</option>
+									<option  >경북</option>
+									<option >경남</option>
+									<option >제주</option>
+							</select>
+					  <br>
+					       <p class='ageInline'>최소나이 |    </p><select class='matching_profile'  id='ageMinSelecter' ></select>
+					 <br>
+					       <p class='ageInline'>최대나이 |    </p><select class='matching_profile'  id='ageMaxSelecter'  ></select>			
+
+					 <br>
+								<button id='waitBtn' type="button" class="btn btn-success ">설정완료</button><br><br>
+			</div>					
+								<button type="button" id="chatBtn" class="btn btn-success " href="#carousel-example-generic" data-slide="prev">채팅 입장</button>
+<!-- ㅇ리ㅏ머오라ㅣㅓㅁㄴ올마니얾;ㅣㄴ얼ㄴ밍;ㅏ럼니아ㅓㄻ;ㄴ이ㅏ러민ㅇ;ㅏ러미나럼ㄴ이ㅏ러ㅣ나ㅓ -->  
+  
 							</div> <!-- 패널 바디 종료 -->
 							<div class="panel-footer">
 								<button id='modifyProfile' type="button" class="btn btn-success" href="#carousel-example-generic" data-slide="next">프로필 수정</button><!-- onclick="location.href='/html/profile/update.html'" -->
@@ -161,6 +157,8 @@
 								</button>
 							</div>
 		   		</div>
+		    
+		    
 		    
 		    	<div class="item">
 			    	<div class="panel panel-success">
@@ -181,7 +179,7 @@
 	    				<div class="panel panel-info">
 			  				<div class="panel-heading imgDiv" id='cityImg'></div>
 			  				<div class="panel-body">
-			  					<p>지역</p>
+			  					<p class='profileheader'>지역</p>
 							  	<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","seoul");'id='seoul'>서울</button>
 									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","busan");'id='busan'>부산</button>
 									<button class="btn btn-default cityBtn" onclick='CityAndBloodCheck("city","incheon");'id='incheon'>인천</button>
@@ -230,7 +228,7 @@
 					    <div class="panel panel-info">
 						  	<div class="panel-heading imgDiv" id='bloodImg'></div>
 								<div class="panel-body">
-									<p>혈액형</p>
+									<p class='profileheader'>혈액형</p>
 								  <button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","a");'id='a'>A형</button>
 									<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","b");'id='b'>B형</button>
 									<button class="btn btn-default bloodBtn" onclick='CityAndBloodCheck("blood","o");'id='o'>O형</button>
@@ -266,7 +264,7 @@
 					 			<div class="panel-heading imgDiv" id='jobImg'></div>
 								<div class="panel-body">
 									<div id='job1Div'>
-										<p>직업</p>
+										<p class='profileheader'>직업</p>
 										<input type="text" class="form-control input-sm" id="job1" onkeyup="eventonkeypress('#job1');" placeholder="예) 교사, 공무원, 학생"  data-formCheck='true'>
 							 		  <label class='onkey' for='job1' id='job1Label'></label>
 						 		  </div>
@@ -297,7 +295,7 @@
 						  <div class="panel panel-info">
 						  	<div class="panel-heading imgDiv" id='faceImg'></div>
 								<div class="panel-body">
-									<p>외모</p>
+									<p class='profileheader'>외모</p>
 									<div id='face1Div'>
 									  <input type="text" data-formCheck='true' class="form-control input-sm" id="face1" onkeyup="eventonkeypress('#face1');" placeholder="예) 큰 눈, 가는 허리">
 							 		  <label class='onkey' for='face1' id='face1Label'></label>
@@ -352,7 +350,7 @@
 						  <div class="panel panel-info">
 							  <div class="panel-heading imgDiv" id='styleImg'></div>
 								<div class="panel-body">
-								  <p>스타일</p>
+								  <p class='profileheader'>스타일</p>
 									<div id='style1Div'>
 									  <input type="text" data-formCheck='true' class="form-control input-sm" id="style1" onkeyup="eventonkeypress('#style1');" placeholder="예) 귀여움, 섹시함">
 								 		<label class='onkey' for='style1'  id='style1Label'></label>
@@ -406,7 +404,7 @@
 						  <div class="panel panel-info">
 						 		<div class="panel-heading imgDiv" id='personalityImg'></div>
 								<div class="panel-body">
-									<p>성격</p>
+									<p class='profileheader'>성격</p>
 									<div id='personality1Div'>
 									  <input type="text" data-formCheck='true' class="form-control input-sm" id="personality1" onkeyup="eventonkeypress('#personality1');" placeholder="예) 꼼꼼함, 지루함">
 								 		<label class='onkey' for='personality1'  id='personality1Label'></label>
@@ -461,7 +459,7 @@
 						  <div class="panel panel-info">
 						 		<div class="panel-heading imgDiv" id='hobbyImg'></div>	
 								<div class="panel-body">
-									<p>취미</p>
+									<p class='profileheader'>취미</p>
 									<div id='hobby1Div'>
 									  <input type="text" data-formCheck='true' class="form-control input-sm" id="hobby1" onkeyup="eventonkeypress('#hobby1');" placeholder="예) 산책하기, 영화보기">
 								 		<label class='onkey' for='hobby1'  id='hobby1Label'></label>
@@ -561,6 +559,7 @@
 <script src="/script/lib/bootstrap.js"></script>
 <script src="/script/lib/bootstrap-slider.js"></script>
 <script src="/script/js/main.js"></script>
+<script src="/script/lib/jquery.fs.selecter.min.js"></script>
 
 </body>
 </html>
