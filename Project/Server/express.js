@@ -342,6 +342,7 @@ app.post('/updateMatching', function(req, res){
 });
 
 app.get('/getUserProfile', function(req, res){	
+	console.log('aaa');
 	connection.query('select UNO, ID, TEL, CITY, MIN_AGE, MAX_AGE from users where UNO=' + LoginUserUNO, function(err, userData, fields){
 		connection.query('select FACE from face where UNO=' + userData[0].UNO , function(err, face, fields) {
 			connection.query('select STYLE from style where UNO=' + userData[0].UNO , function(err, style, fields) {
@@ -428,6 +429,8 @@ app.post('/upload', multipartMiddleware, function(req, res){
 				}
 			});
 		});
+		
+		res.send('aaaaxx');
 /*		
 		connection.query('insert into photo (UNO, PHOTO_NO, PHOTO) values(' + LoginUserUNO + ',1,"' + dataNow + '_' + imglist[0].name +  '"),('
 																			+ LoginUserUNO + ',2,"' + dataNow + '_' + imglist[1].name +  '"),('
