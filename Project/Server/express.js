@@ -62,15 +62,6 @@ io.sockets.on('connection', function(socket){
 		});
 	});
 	
-	socket.on('userDataSetting', function(data){
-		console.log('asd');
-		var myRoom = Date.now();
-		socket.join(myRoom);
-		socket.set('myRoom', myRoom);
-		socket.set('myData', data);
-		socket.set('socketid', socket.id);
-	});
-	
 	socket.on('startTimer', function(){
 		socket.get('room', function(error, room){
 			socket.get('socketid', function(error, socketid){
@@ -149,11 +140,6 @@ app.post('/sos', function(req, res){
 	
 	var date = new Date();
 	var sos_date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	console.log(req.param('myUNO'));
-	console.log(req.param('youUNO'));
-	console.log(sos_date);
-	console.log(req.param('sosText'));
-	console.log(req.param('chatText'));
 	
 	 connection.query('insert into sos(UNO, UNO2, SOS_DATE, SOS_MSG, CHAT_DATA) values(' + req.param('myUNO') + ',' 
 			 																			  + req.param('youUNO') + ',"'
@@ -181,8 +167,7 @@ app.get('/login', function(req, res){
 });
 
 app.post('/loginChk', function(req, res){
-	
-	connection.query('select PW, CITY from users where ID="' + req.param('userID') + '"', function(err, rows, fields) {
+	connection.query('select * from users where ID="' + req.param('userID') + '"', function(err, rows, fields) {
 		
 		if(rows[0]){
 			try{
@@ -275,83 +260,82 @@ app.post('/searchPw', function(req, res){
 });
 
 app.post('/profileInsert' , function(req, res){
-	connection.query('insert into profile (UNO, CITY, BLOOD, JOB) ' +
-			 		 'values(' + req.param('uno') + ',"' + req.param('city') +
-			 		 						   '","' + req.param('blood') + 
-			 		 						   '","' + req.param('job') + '")', function(err, rows, fields) {
-		
-			connection.query('insert into face (UNO, FACE_NO, FACE) ' +
-			 		 'values(' + req.param('uno') + ',1,"' + req.param('face1') + '"),'
-			 		 	 + '(' + req.param('uno') + ',2,"' + req.param('face2') + '"),'
-			 		 	 + '(' + req.param('uno') + ',3,"' + req.param('face3') + '"),'
-			 		 	 + '(' + req.param('uno') + ',4,"' + req.param('face4') + '"),'
-			 		 	 + '(' + req.param('uno') + ',5,"' + req.param('face5') + '")'
-			 		 		   , function(err, rows, fields) {console.log('face End');});
-			
-			connection.query('insert into style (UNO, STYLE_NO, STYLE) ' +
-			 		 'values(' + req.param('uno') + ',1,"' + req.param('style1') + '"),'
-			 		     + '(' + req.param('uno') + ',2,"' + req.param('style2') + '"),'
-			 		     + '(' + req.param('uno') + ',3,"' + req.param('style3') + '"),'
-			 		     + '(' + req.param('uno') + ',4,"' + req.param('style4') + '"),'
-			 		     + '(' + req.param('uno') + ',5,"' + req.param('style5') + '")'
-			 		 		   , function(err, rows, fields) {console.log('style End');});
-			
-			connection.query('insert into ct (UNO, CT_NO, CT) ' +
-			 		 'values(' + req.param('uno') + ',1,"' + req.param('personality1') + '"),'
-			 		     + '(' + req.param('uno') + ',2,"' + req.param('personality2') + '"),'
-			 		     + '(' + req.param('uno') + ',3,"' + req.param('personality3') + '"),'
-			 		     + '(' + req.param('uno') + ',4,"' + req.param('personality4') + '"),'
-			 		     + '(' + req.param('uno') + ',5,"' + req.param('personality5') + '")'
-			 		 		   , function(err, rows, fields) {console.log('personality End');});
-			
-			connection.query('insert into hobby (UNO, HOBBY_NO, HOBBY) ' +
-			 		 'values(' + req.param('uno') + ',1,"' + req.param('hobby1') + '"),'
-			 		 	 + '(' + req.param('uno') + ',2,"' + req.param('hobby2') + '"),'
-			 		 	 + '(' + req.param('uno') + ',3,"' + req.param('hobby3') + '"),'
-			 		 	 + '(' + req.param('uno') + ',4,"' + req.param('hobby4') + '"),'
-			 		 	 + '(' + req.param('uno') + ',5,"' + req.param('hobby5') + '")'
-			 		 		   , function(err, rows, fields) {console.log('hobby End');});
-			
-		connection.query('select AGE from users where UNO=' + req.param('uno'), function(err, rows, fields) {
-			if((rows[0].AGE - 3) < 20){
-				connection.query('update users set CITY="' + req.param('city') + '", MIN_AGE = 20, MAX_AGE=' + (rows[0].AGE + 3) + 
-								 ' where UNO=' + req.param('uno') , function(err, rows, fields) {
-					res.send('프로필이 설정되었습니다.');
-				});
-			}else{
-				connection.query('update users set CITY="' + req.param('city') + '", MIN_AGE =' + (rows[0].AGE - 3) + 
-								 ', MAX_AGE=' + (rows[0].AGE + 3) + ' where UNO=' + req.param('uno'), function(err, rows, fields) {
-					res.send('프로필이 설정되었습니다.');
-				});
-			};
-		});
+	
+	connection.query('update users set CITY="' + req.param('city') + 
+								  '", BLOOD="' + req.param('blood') + 
+								    '", JOB="' + req.param('job') + 
+								'" where UNO=' + req.param('uno') 
+								, function(err, rows, fields) {});
+	
+	connection.query('insert into face (UNO, FACE_NO, FACE) ' +
+	 		 'values(' + req.param('uno') + ',1,"' + req.param('face1') + '"),'
+	 		 	 + '(' + req.param('uno') + ',2,"' + req.param('face2') + '"),'
+	 		 	 + '(' + req.param('uno') + ',3,"' + req.param('face3') + '"),'
+	 		 	 + '(' + req.param('uno') + ',4,"' + req.param('face4') + '"),'
+	 		 	 + '(' + req.param('uno') + ',5,"' + req.param('face5') + '")'
+	 		 		   , function(err, rows, fields) {});
+	
+	connection.query('insert into style (UNO, STYLE_NO, STYLE) ' +
+	 		 'values(' + req.param('uno') + ',1,"' + req.param('style1') + '"),'
+	 		     + '(' + req.param('uno') + ',2,"' + req.param('style2') + '"),'
+	 		     + '(' + req.param('uno') + ',3,"' + req.param('style3') + '"),'
+	 		     + '(' + req.param('uno') + ',4,"' + req.param('style4') + '"),'
+	 		     + '(' + req.param('uno') + ',5,"' + req.param('style5') + '")'
+	 		 		   , function(err, rows, fields) {});
+	
+	connection.query('insert into ct (UNO, CT_NO, CT) ' +
+	 		 'values(' + req.param('uno') + ',1,"' + req.param('personality1') + '"),'
+	 		     + '(' + req.param('uno') + ',2,"' + req.param('personality2') + '"),'
+	 		     + '(' + req.param('uno') + ',3,"' + req.param('personality3') + '"),'
+	 		     + '(' + req.param('uno') + ',4,"' + req.param('personality4') + '"),'
+	 		     + '(' + req.param('uno') + ',5,"' + req.param('personality5') + '")'
+	 		 		   , function(err, rows, fields) {});
+	
+	connection.query('insert into hobby (UNO, HOBBY_NO, HOBBY) ' +
+	 		 'values(' + req.param('uno') + ',1,"' + req.param('hobby1') + '"),'
+	 		 	 + '(' + req.param('uno') + ',2,"' + req.param('hobby2') + '"),'
+	 		 	 + '(' + req.param('uno') + ',3,"' + req.param('hobby3') + '"),'
+	 		 	 + '(' + req.param('uno') + ',4,"' + req.param('hobby4') + '"),'
+	 		 	 + '(' + req.param('uno') + ',5,"' + req.param('hobby5') + '")'
+	 		 		   , function(err, rows, fields) {});
+	
+	connection.query('select AGE from users where UNO=' + req.param('uno'), function(err, rows, fields) {
+		if((rows[0].AGE - 3) < 20){
+			connection.query('insert into iwantyou (UNO, CITY, MIN_AGE, MAX_AGE)' + 
+					' values(' + req.param('uno') + ',"' + req.param('city') + '",20 ,' + (rows[0].AGE + 3) + ')' , function(err, rows, fields) {
+				res.send('프로필이 설정되었습니다.');
+			});
+		}else{
+			connection.query('insert into iwantyou (UNO, CITY, MIN_AGE, MAX_AGE)' + 
+					' values(' + req.param('uno') + ',"' + req.param('city') + '",' + (rows[0].AGE - 3) + ',' + (rows[0].AGE + 3) + ')' , function(err, rows, fields) {
+				res.send('프로필이 설정되었습니다.');
+			});
+		};
 	});
+	
 });
 
 app.get('/getMatchingProfile', function(req, res){
-	connection.query('select CITY, MIN_AGE, MAX_AGE from users where UNO=' + req.param('uno') , function(err, rows, fields) {
+	connection.query('select CITY, MIN_AGE, MAX_AGE from iwantyou where UNO=' + req.param('uno') , function(err, rows, fields) {
 		res.send(rows);
 	});
 });
 
 app.post('/updateMatching', function(req, res){
-	connection.query('update users set CITY="' + req.param('city') + '", MIN_AGE=' + req.param('minage') + 
+	connection.query('update iwantyou set CITY="' + req.param('city') + '", MIN_AGE=' + req.param('minage') + 
 					 ', MAX_AGE=' + req.param('maxage') + ' where UNO=' + req.param('uno') , function(err, rows, fields) {
 		res.send('매칭 상대 정보가 설정되었습니다.');
 	});
 });
 
 app.get('/getUserProfile', function(req, res){	
-	console.log('aaa');
-	connection.query('select UNO, ID, TEL, CITY, MIN_AGE, MAX_AGE from users where UNO=' + LoginUserUNO, function(err, userData, fields){
+	connection.query('select * from users where UNO=' + LoginUserUNO, function(err, userData, fields){
 		connection.query('select FACE from face where UNO=' + userData[0].UNO , function(err, face, fields) {
 			connection.query('select STYLE from style where UNO=' + userData[0].UNO , function(err, style, fields) {
 				connection.query('select CT from ct where UNO=' + userData[0].UNO , function(err, ct, fields) {
 					connection.query('select HOBBY from hobby where UNO=' + userData[0].UNO , function(err, hobby, fields) {
-						connection.query('select PHOTO from photo where UNO=' + userData[0].UNO , function(err, photo, fields) {
-							connection.query('select CITY, BLOOD, JOB from profile where UNO=' + userData[0].UNO , function(err, profile, fields) {
-								res.send({'userData':userData,'face':face,'style':style,'ct':ct,'hobby':hobby,'photo':photo,'profile':profile});
-							});
+						connection.query('select CITY, MIN_AGE, MAX_AGE from iwantyou where UNO=' + userData[0].UNO , function(err, iwantYou, fields) {
+							res.send({'userData':userData,'face':face,'style':style,'ct':ct,'hobby':hobby,'iwantYou':iwantYou});
 						});
 					});
 				});
@@ -395,7 +379,6 @@ app.post('/profileUpdate', function(req, res){
 											  + ' WHEN HOBBY_NO=5 THEN "' + req.param('hobby5') + '"'
 											  + ' END WHERE UNO = ' + req.param('uno') , function(err, profile, fields) {});
 	
-	console.log('프로필 수정완료');
 	res.send('프로필 수정완료');
 });
 
@@ -415,28 +398,31 @@ app.post('/updatePw', function(req, res){
 
 app.post('/upload', multipartMiddleware, function(req, res){
 	
-	console.log(req.files);
+	var dataNow = Date.now();
+	var writePath = "D:\\8pm\\Project\\Server\\multipart\\" + dataNow + "_";
+	var type = req.files.file.type.split('/')[1];
 	
-		var dataNow = Date.now();
-		var writePath = "D:\\8pm\\Project\\Server\\multipart\\" + dataNow + "_";
-		var type = req.files.file.type.split('/')[1];
-		console.log(type);
-		
-		fs.readFile(req.files.file.path, function(error, data){
-			fs.writeFile(writePath + req.files.file.name + '.' + type, data, function(error){
-				if(error){
-					console.log(error);
-				}
+	connection.query('select PHOTO from users where UNO=' + req.body.uno , function(err, PHOTO, fields) {
+		console.log(PHOTO[0].PHOTO);
+		if(PHOTO[0].PHOTO){
+			fs.unlink('/imgData/' + PHOTO[0].PHOTO , function (err) {
+			  if (err) throw err;
+			  console.log('successfully deleted text2.txt');
 			});
+		};
+	});
+	
+	fs.readFile(req.files.file.path, function(error, data){
+		fs.writeFile(writePath + req.files.file.name + '.' + type, data, function(error){
+			if(error){
+				console.log(error);
+			}else{
+				connection.query('update users set PHOTO="' + dataNow + '_' + req.files.file.name + '.' + type + '" where UNO=' + req.body.uno  , function(err, profile, fields) {
+					res.send('이미지 등록 완료');
+				});
+			};
 		});
-		
-		res.send('aaaaxx');
-/*		
-		connection.query('insert into photo (UNO, PHOTO_NO, PHOTO) values(' + LoginUserUNO + ',1,"' + dataNow + '_' + imglist[0].name +  '"),('
-																			+ LoginUserUNO + ',2,"' + dataNow + '_' + imglist[1].name +  '"),('
-																			+ LoginUserUNO + ',3,"' + dataNow + '_' + imglist[2].name +  '"),('
-																			+ LoginUserUNO + ',4,"' + dataNow + '_' + imglist[3].name +  '")'
-																			, function(err, rows, fields){console.log('upload end');});*/
+	});
 });
 
 
