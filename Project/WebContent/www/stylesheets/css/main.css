@@ -13,7 +13,7 @@ span { font-weight: bold; }
 .ageInline, #ageMinSelecter, #ageMaxSelecter{display:inline-block;}
 .ageInline{width:30%;font-size: 120%;font-weight: bold;display: inline-block;vertical-align: bottom;margin-left: 6%;}
 #waitBtn, #chatBtn{width: 60%;margin-left: 34%;}
-#abc{background-image:url('/img/abc.jpg'); background-size:100% 100%;}
+#mainImg{background-image:url('/img/abc.jpg'); background-size:100% 100%;}
 /* 메인 끝이에용 */
 
 

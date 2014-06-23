@@ -63,17 +63,6 @@ $(function() {
 		  }
 	});
 	
-//	$('#select').slider();
-	
-/*	$('.slider-handle').on({'mousemove': function(){
-		$('#minAge').html($('.tooltip-inner').html().split(' : ')[0]);
-		$('#maxAge').html($('.tooltip-inner').html().split(' : ')[1]);
-	}, 'mouseup': function(){
-		$('#minAge').html($('.tooltip-inner').html().split(' : ')[0]);
-		$('#maxAge').html($('.tooltip-inner').html().split(' : ')[1]);
-	}});*/
-		
-	
 	$('.carousel').carousel({
 		  interval: 0
 	});
@@ -87,6 +76,9 @@ $(function() {
 	$.getJSON('/getUserProfile',function(data){
 		
 		myData = data;
+		
+		$("#ageMinSelecter")[0].options[data.userData[0].MIN_AGE-20].selected = true;
+		
 		$('#userid').val(data.userData[0].ID);
 		$('#roomname').val("ypy1001hiletsgo");
 		socket.emit('userDataSetting', data);
@@ -99,21 +91,22 @@ $(function() {
 		
 		var cityAll = $('.cityBtn');
 		var bloodAll = $('.bloodBtn');
+		
 		for(var i=0; i<cityAll.length; i++){
-			if($('#' + cityAll[i].id).html() == data.profile[0].CITY){
+			if($('#' + cityAll[i].id).html() == data.userData[0].CITY){
 				$('#' + cityAll[i].id).click();
 				break;
-			}
+			};
 		}
 		
 		for(var i=0; i<bloodAll.length; i++){
-			if($('#' + bloodAll[i].id).html() == data.profile[0].BLOOD){
+			if($('#' + bloodAll[i].id).html() == data.userData[0].BLOOD){
 				$('#' + bloodAll[i].id).click();
 				break;
-			}
+			};
 		}
 		
-		$('#job1').val(data.profile[0].JOB);
+		$('#job1').val(data.userData[0].JOB);
 		
 		for(var i=0; i<5; i++){
 			

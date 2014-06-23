@@ -606,6 +606,7 @@ $(function() {
 			userID : $('#inputID').val(),
 			userPW : $('#inputPW').val()
 		}, function(data){
+			console.log(data);
 			if(data == "가입되어있지 않은 ID입니다."){
 				toast(data);
 				$('#inputID').val("");
