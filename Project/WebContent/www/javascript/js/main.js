@@ -286,7 +286,7 @@ $(function() {
 		//console.log('aaaa');
 		timer();
 	});
-	
+	//dfs
 	socket.on('after', function(data){
 		if(data == 'ok'){
 			abc=0;
