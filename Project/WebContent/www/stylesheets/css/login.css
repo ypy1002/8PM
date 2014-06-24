@@ -18,12 +18,11 @@ label { margin-left: 6%; font-size: 80%; color : red;}
 
 #loginBtn, #signinBtn { width: 49.02%; }
 #clock{ width : 38%; margin : 10% auto; }
-#color{text-align:center; font-weight: bold; font-size: 500%; font-family:'나눔손글씨 펜'; margin-top: -1%; margin-bottom:17%; color:seagreen;} 
+#color{text-align:center; font-weight: bold; font-size: 500%; font-family:'나눔손글씨 펜'; margin-top: -1%; margin-bottom:17%; color: #37BC9B;} 
 #box {width: 70%; margin : auto; }
 #anchorDiv{float:right; margin-top:5%;}
 
-#PWSearch, #IDSearch { margin-top : 20%; }
-
+#PWSearch, #IDSearch { margin-top : 20%;}
 h1{ font-family:'나눔손글씨 펜'; font-weight: bold; color:seagreen;}
 label { color : red; font-size : 80%;}
 #pwUpdateChk { margin-top: 5%; }

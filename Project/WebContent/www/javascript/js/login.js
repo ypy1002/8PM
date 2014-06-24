@@ -19,10 +19,10 @@ var toast = function(msg){
 	      "border-radius": "5px",
 	      
 	       left: $(window).width()/6,
-	       top: $(window).height()/2 })
-	     
+	       top: 50 + "%" })
+	    // $(window).height()/3
 	   .appendTo( $('body')).delay( 500 )
-	   .fadeOut( 3000, function(){
+	   .fadeOut( 10000, function(){
 	      $(this).remove();
 	   });
 	};
@@ -58,9 +58,42 @@ function selectSearch(menu){
 	}
 }
 
+///////한글입력불가 아이디 이것도 확인해야되....ㅜㅜㅜ 파폭안되네..///////
+function hangle(obj){
+    var re = /[\ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+    return obj.replace(re, '');
+}
+
+//////////회원가입 공백불가!////////
+function trim(strSource)  {
+    var re = /^\s+|\s+$/g;
+    return strSource.replace(re, '');
+}
+
+/////////자음 모음 사용불가 확인!!!!!!!!/////
+function aaa(str){
+	//console.log(str);
+	var re = /[\ㄱ-ㅎㅏ-ㅣ]/g;
+	if (re.test(str)) {
+		return str.replace(re, '');
+	    //alert("한글이 아닙니다. (자음, 모음만 있는 한글은 처리하지 않습니다.)");
+	} 
+}
+////////////////////////////signIn 특수문자불가!! 아이디, 이름////// 
+function inputCheckSpecial(str){
+	var strobj = str;
+	re = /[~!@\#$%^&*\()\=+_']/gi;
+	if(re.test(strobj)){
+		$('#signId').val($('#signId').val().replace(re,''));
+		$('#signName').val($('#signName').val().replace(re,''));
+	}
+	
+	
+}
+
 function labelToggle(){
 	$('label').css('display','none');
-	
+
 	if($('#signId').val().length > 5){
 		$('#signIdOKLabel').css('display','');
 	}
@@ -188,6 +221,7 @@ function checkLength(target){
 }
 
 function checkId(target){
+	
 	if($('#' + target.id).val().length > 0 && $('#' + target.id).val().length < 6){
 		statusEvent(target, 6 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
 		return false;
@@ -258,9 +292,9 @@ function checkPwConfirm(target){
 }
 //////////////////////////////////////////////ㅁㄴㅇㄹ;ㅣ마너린ㅁ;럼ㄴㅇㄹ////
 function checkName(target){
-	$('#' + target.id).val($('#' + target.id).val().replace(/[a-z0-9]/gi,''));
+	$('#' + target.id).val($('#' + target.id).val().replace(/[a-z0-9]/gi,''));//영어,숫자입력시 
 	
-	console.log($('#' + target.id).val());
+	//console.log($('#' + target.id).val());
 	if($('#' + target.id).val().length < 2){
 		statusEvent(target, 2 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
 		return false;
@@ -606,7 +640,7 @@ $(function() {
 			userID : $('#inputID').val(),
 			userPW : $('#inputPW').val()
 		}, function(data){
-			console.log(data);
+			//console.log(data);
 			if(data == "가입되어있지 않은 ID입니다."){
 				toast(data);
 				$('#inputID').val("");

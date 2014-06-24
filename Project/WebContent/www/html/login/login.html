@@ -142,7 +142,7 @@
 						<div id='signIdDiv'>
 						  <span class="glyphicon glyphicon-asterisk" id='signIdTypo'></span>
 						  <span class="glyphicon glyphicon-ok" id='signIdTypoSuccess' style='display:none'></span>
-						  <input type="text" class="form-control checkInput" id="signId" placeholder='ID(6자이상)' maxlength="20">
+						  <input type="text" class="form-control checkInput" id="signId" placeholder='ID(6자이상)' maxlength="20" onkeyup="inputCheckSpecial(this.value); trim(this.value); hangle(this.value);">
 						  <label for='signId' id='signIdLabel'></label>
 						  <label for='signId' id='signIdOKLabel'></label>
 					  </div>
@@ -150,41 +150,41 @@
 					  <div id='signPwDiv'>
 					  	<span class="glyphicon glyphicon-asterisk" id='signPwTypo'></span>
 					  	<span class="glyphicon glyphicon-ok" id='signPwTypoSuccess' style='display:none'></span>
-						  <input type="password" class="form-control checkInput" id="signPw" placeholder="비밀번호(8자이상)" maxlength="25">
+						  <input type="password" class="form-control checkInput" id="signPw" placeholder="비밀번호(8자이상)" maxlength="25" onkeyup="trim(this.value);">
 						  <label for="signPw" id='signPwLabel'></label>
 					  </div>
 					  
 					  <div id='signPwConfirmDiv'>
 					  	<span class="glyphicon glyphicon-asterisk" id='signPwConfirmTypo'></span>
 					  	<span class="glyphicon glyphicon-ok" id='signPwConfirmTypoSuccess' style='display:none'></span>
-						  <input type="password" class="form-control checkInput" id="signPwConfirm" placeholder="비밀번호확인" maxlength="25"  >
+						  <input type="password" class="form-control checkInput" id="signPwConfirm" placeholder="비밀번호확인" maxlength="25" onkeyup="trim(this.value);" >
 						  <label for="signPwConfirm" id='signPwConfirmLabel'></label>
 					  </div>
 
 						<div id='signNameDiv'>
 							<span class="glyphicon glyphicon-asterisk" id='signNameTypo'></span>
 							<span class="glyphicon glyphicon-ok" id='signNameTypoSuccess' style='display:none'></span>
-						  <input type="text" class="form-control checkInput" id="signName" placeholder="이름" maxlength="10">
+						  <input type="text" class="form-control checkInput" id="signName" placeholder="이름" maxlength="10" onkeyup="inputCheckSpecial(this.value); trim(this.value); aaa(this.value);" >
 						  <label for="signName" id='signNameLabel'></label>
 						</div>
 					  
 					  <div id='signYearDiv' class='dateBox'>
 					  	<span class="glyphicon glyphicon-asterisk" id='signYearTypo'></span>
 					  	<span class="glyphicon glyphicon-ok" id='signYearTypoSuccess' style='display:none'></span>
-						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS" id='signYear' placeholder="년" maxlength="4">
+						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS" id='signYear' placeholder="년" maxlength="4" onkeyup="trim(this.value);">
 						  <label id='AgeLabel'></label>
 					  </div>
 
 					  <div id='signMonthDiv' class='dateBox'>
 					  	<span class="glyphicon glyphicon-asterisk" id='signMonthTypo'></span>
 					  	<span class="glyphicon glyphicon-ok" id='signMonthTypoSuccess' style='display:none'></span>
-						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS2"id='signMonth' placeholder="월" maxlength="2">
+						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS2"id='signMonth' placeholder="월" maxlength="2" onkeyup="trim(this.value);">
 					  </div>
 
 					  <div id='signDayDiv' class='dateBox'>
 					  	<span class="glyphicon glyphicon-asterisk" id='signDayTypo'></span>
 					  	<span class="glyphicon glyphicon-ok" id='signDayTypoSuccess' style='display:none'></span>
-						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS2" id='signDay' placeholder="일" maxlength="2">
+						  <input type="text" class="form-control checkInput yearDateMonthDateDayDateInlinCSS2" id='signDay' placeholder="일" maxlength="2" onkeyup="trim(this.value);">
 					  </div>
 					  
 					  <div id='dateLabelDiv'>
@@ -196,7 +196,7 @@
 					  <div id='signPhoneNumberDiv'>
 					  	<span class="glyphicon glyphicon-asterisk" id='signPhoneNumberTypo'></span>
 					  	<span class="glyphicon glyphicon-ok" id='signPhoneNumberTypoSuccess' style='display:none'></span>
-						  <input type="text" class="form-control checkInput" id="signPhoneNumber" placeholder="휴대폰번호" maxlength="11">
+						  <input type="text" class="form-control checkInput" id="signPhoneNumber" placeholder="휴대폰번호" maxlength="11" onkeyup="trim(this.value);">
 						  <button type="button" class="btn btn-success btn-sm" id="number">인증번호받기</button> 
 						  <button type="button" class="btn btn-success btn-sm" id="signEnd" style='display:none'>회원가입 완료하기</button>
 						  <label for ='signPhoneNumber' id='signPhoneNumberLabel'></label>
@@ -204,7 +204,7 @@
 						</div>
 					
 						<div id='signRecievedNumberDiv'>
-					  	<input type="text" class="form-control" id="signRecievedNumber" style='display:none' placeholder="인증번호입력">
+					  	<input type="text" class="form-control" id="signRecievedNumber" style='display:none' placeholder="인증번호입력"  onkeyup="trim(this.value);">
 							<button type="button" class="btn btn-success btn-sm" id="complete" style='display:none'>인증</button>
 					 		<label for='signRecievedNumber' id='signRecievedNumberLabel'>인증번호가 틀렸습니다.</label>
 					 	</div>

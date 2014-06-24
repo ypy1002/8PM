@@ -10,6 +10,11 @@ var chatStatus = 0;
 var socket = io.connect('http://localhost:4000');
 var blindHeight = 12.8;
 var blindPhoto = 12.8;
+var minute = 1;
+var second = 10;
+var miliSecond = 99;
+var mileCheck = 0;
+var abc = 0;
 //toast 2014.06.17
 var toast = function(msg){
 	   $("<div><div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h4><span class='glyphicon glyphicon-heart'></span>&nbsp"+msg+"</h4></div></div> ")
@@ -69,15 +74,21 @@ $(function() {
 	
 	$('#city1, #blood1, label, .toggleInput, .carousel-indicators, .file, #photoSubmit').css('display','none');
 	
-	$('.moveMainBtn').click(function(){
+
+	$('#moveMainBtn').click(function(){
+		abc = 0;
+		clearInterval(aaa);
+		clearInterval(bbb);
+		socket.emit('/stopTimer');
 		$('#mainPage').click();
+		$('#txtarea>div').remove();
 	});
 	
 	$.getJSON('/getUserProfile',function(data){
 		
 		myData = data;
 		
-		$("#ageMinSelecter")[0].options[data.userData[0].MIN_AGE-20].selected = true;
+		$("#ageMinSelecter")[0].options[data.iwantYou[0].MIN_AGE-20].selected = true;
 		
 		$('#userid').val(data.userData[0].ID);
 		$('#roomname').val("ypy1001hiletsgo");
@@ -143,9 +154,7 @@ $(function() {
 	});
 	
 	$('#chatBtn').click(function(){
-		if(chatStatus++ == 0){
-			$('#enter').click();
-		}
+		$('#enter').click();
 	});
 	
 	$.getJSON('/getMatchingProfile', {
@@ -173,6 +182,7 @@ $(function() {
 			});
 	  }else{
 		  toast('최소나이가 최대나이보다 클 수 없습니다 재설정해주세요');
+		  //채팅입장도 막아야지 
 		  return false;
 	  }
 	});
@@ -181,10 +191,21 @@ $(function() {
 	// 채팅 스크립트 ---------------
 
 	$('#nono').on('click', function(){
+		abc=0;
+		clearInterval(aaa);
+		clearInterval(bbb);
+		$('#blind').css('height','13.8%');
+		$('#okok').css('display','none');
+		$('#nono').css('display','none');
+		$('#after').css('background-image', 'url("/img/ihateyou.png")').css('background-size', '100% 100%').css('float','right');
 		socket.emit('nono');
 	});
-	
-	socket.on('toast_nono', function(data){
+	socket.on('alert_nono', function(data){
+		abc=0;
+		clearInterval(aaa);
+		clearInterval(bbb);
+		$('#blind').css('height','13.8%');
+		$('#after').css('background-image', 'url("/img/ihateyou.png")').css('background-size', '100% 100%').css('float','right');
 		toast(data + "님이 거절하셨네요 ㅜㅜ 안녕~~~~");
 	});
 	
@@ -196,17 +217,12 @@ $(function() {
 				|| $('#roomname').val()[0] == " ") {
 			toast("방이름을 입력해주세요.");
 		} else {
-			
-			$.post('/getMyChatProfile', {
-				id : $('#userid').val()
-			}, function(data){
-				data.id = $('#userid').val();
+
 				socket.emit('join', {
 					'roomname' : $('#roomname').val(),
-					'userData' : data
+					'userData' : myData.userData[0]
 				});
-			});
-			
+
 			$('#log').css('display', 'none');
 			$('#chat').css('display', '');
 			$(".timerDiv2").text( 10 + ":" + 00 );
@@ -220,8 +236,15 @@ $(function() {
     });
 	
 	$('#okok').click(function(){
+		abc=0;
+		clearInterval(aaa);
+		clearInterval(bbb);
 		socket.emit('after','ok');
-		$('#phoneNum').css('font-size','120%').html(youData.unoTel[0].TEL);
+		$('#phoneNum').css('font-size','120%').html(youData.TEL);
+		$('#blind').css('height', '0');
+		$('#okok').css('display','none');
+		$('#nono').css('display','none');
+		$('#after').css('background-image', 'url("/img/ilikeyou.png")').css('background-size', '100% 100%').css('float','right');
 	});
 
 	
@@ -232,13 +255,14 @@ $(function() {
 
 		if (divLength[0] == undefined) {
 			$('#txtarea').append(
-					'<div class="joinUser"><span>' + data.userData.id + '님이 입장하셨습니다.</div><br><div class="alarm">채팅은 10분동안만 진행됩니다! 호감도를 표시하는 만큼 상대방에게 회원님의 사진이 보여질수도, 가려질수도 있어요!</div>' );
+					'<div class="joinUser"><span>' + data.userData.ID + '님이 입장하셨습니다.</div>');
 		} else {
 			youData = data.userData;
+			console.log(youData.PHOTO);
 			$('#txtarea').append(
-					'<br><div class="joinUser"><span>' + data.userData.id
+					'<br><div class="joinUser"><span>' + data.userData.ID
 							+ '님이 입장하셨습니다.</div><br><div class="alarm">채팅은 10분동안만 진행됩니다! 호감도를 표시하는 만큼 상대방에게 회원님의 사진이 보여질수도, 가려질수도 있어요!</div>');
-			$('#person').removeAttr('src').attr('src','/imgData/'+ data.userData.photo[0].PHOTO );
+			$('#person').css('background-image', 'url("/imgData/' + youData.PHOTO + '")' );
 			socket.emit('startTimer');
 		}
 	});
@@ -247,15 +271,22 @@ $(function() {
 	socket.on('startTimer', function(data){
 		if(data){
 			youData = data;
-			$('#person').removeAttr('src').attr('src','/imgData/'+ data.photo[0].PHOTO );
+			console.log(youData.PHOTO);
+			$('#person').css('background-image', 'url("/imgData/' + youData.PHOTO + '")' );
 		};
 		$('#txt').removeAttr('readonly');
+		//console.log('aaaa');
 		timer();
 	});
 	
 	socket.on('after', function(data){
 		if(data == 'ok'){
-		    $('#phoneNum').css('font-size','120%').html(youData.unoTel[0].TEL);
+			abc=0;
+			clearInterval(aaa);
+			clearInterval(bbb);
+			$('#blind').css('height', '0');
+		    $('#phoneNum').css('font-size','120%').html(youData.TEL);
+			$('#after').css('background-image', 'url("/img/ilikeyou.png")').css('background-size','100% 100%').css('float','right');
 		}else{
 		    $('#after').css('background-image','none');
 	    	$('#okok, #nono, #after>span').css('display','');
@@ -295,7 +326,17 @@ socket.emit('message', {
 
 	socket.on('bye', function() {
 		$('#txtarea').append(
-				'<br><br><div class="joinUser"><span>' + youData.id + '님이 퇴장하셨습니다.');
+				'<br><br><div class="joinUser"><span>' + youData.ID+ '님이 퇴장하셨습니다.');
+		abc=0;
+		clearInterval(aaa);
+		clearInterval(bbb);
+	});
+	
+	////////////////////스탑타이머////////////////
+	socket.on('stopTimer', function(){
+		abc = 0;
+		clearInterval(aaa);
+		clearInterval(bbb);
 	});
 
 	socket.on('message', function(data) {
@@ -376,13 +417,11 @@ function timer2(){
 
 }
 
+var aaa;
+var bbb;
 function timer() {
 	
-   var minute = 1;
-   var second = 10;
-   var miliSecond = 99;
-   var mileCheck = 0;
-   var aaa = setInterval(function(){
+     aaa = setInterval(function(){
 	   
 	   if(minute == 0 && second == 00){
 		   mileCheck = 1;
@@ -391,11 +430,10 @@ function timer() {
 	   
 	   $(".timerDiv2").html( minute + ":" + second );
 	   
-	   if(minute == 1 && second == 0){
-		   $('#txtarea').append('<br><div id="oneMin"><p>3분남았어요!</p></div>');
+	   if(minute < 1 && abc++ == 0){
+		   $('#txtarea').append('<br><div id="oneMin"><p id="3min">3분남았어요!</p></div>');
 		   
-		   var bbb = setInterval(function(){
-			   
+		    bbb = setInterval(function(){
 			   if(miliSecond < 10){
 				   miliSecond = "0" + miliSecond;
 			   }
@@ -620,6 +658,7 @@ function sosTextLengthCheck(sosText){
 		$('#abc').removeClass('disabled');
 		$('#sosTextLength').html(sosTextLength).css('color','black');
 		$('#inputTextLabel').css('display','none');
+		
 	}else if(sosTextLength == 0){
 		$('#abc').addClass('disabled');
 	}else{
@@ -642,11 +681,13 @@ function helpMe(sosYesNo){
 			sosText :$('#inputText').val(),
 			chatText : chatText,
 			myUNO : myData.userData[0].UNO,
-		    youUNO : youData.unoTel[0].UNO
+		    youUNO : youData.UNO
 		}, function(data){
 			socket.emit("bye");
 			$('#sosCloseBtn').click();
 			$('#mainPage').click();
+			$('#chatBtn').css('display','none');
+			
 		});
 	}else{
 		$('#sosCloseBtn').click();
