@@ -198,7 +198,11 @@ $(function() {
 		$('#okok').css('display','none');
 		$('#nono').css('display','none');
 		$('#after').css('background-image', 'url("/img/ihateyou.png")').css('background-size', '100% 100%').css('float','right');
+		 goMain = setTimeout(function(){
+			 $('#moveMainBtn').click();
+		 },2000);
 		socket.emit('nono');
+		
 	});
 	socket.on('alert_nono', function(data){
 		abc=0;
@@ -207,6 +211,10 @@ $(function() {
 		$('#blind').css('height','13.8%');
 		$('#after').css('background-image', 'url("/img/ihateyou.png")').css('background-size', '100% 100%').css('float','right');
 		toast(data + "님이 거절하셨네요 ㅜㅜ 안녕~~~~");
+		 goMain = setTimeout(function(){
+			 $('#moveMainBtn').click();
+		 },2000);
+		 
 	});
 	
 	$('#enter').click(function() {
@@ -426,6 +434,7 @@ function timer() {
 	   if(minute == 0 && second == 00){
 		   mileCheck = 1;
 		   clearInterval(aaa);
+		   $('#moveMainBtn').click();
 	   }
 	   
 	   $(".timerDiv2").html( minute + ":" + second );
@@ -446,6 +455,7 @@ function timer() {
 			   
 			   if(mileCheck == 1 && miliSecond == 0){
 				   clearInterval(bbb);
+				   $('#moveMainBtn').click();
 			   }
 			   
 			   if(--miliSecond < 0){
@@ -667,16 +677,16 @@ function sosTextLengthCheck(sosText){
 		$('#inputTextLabel').css('display','');
 	}
 }
-
+/////////////////////////////
 function helpMe(sosYesNo){
-	
 	if($('#' + sosYesNo.id).html() == '예'){
 		var i = $('#txtarea>div');
 		var chatText = "";
-		
 		for(var j=0; j<i.length; j++){
-			chatText += i[j].innerText + '<br>';
+			chatText += i[j].innerHTML + '<br>';
+			//console.log(chatText);
 		}
+		
 		$.post('/sos', {
 			sosText :$('#inputText').val(),
 			chatText : chatText,
@@ -687,6 +697,7 @@ function helpMe(sosYesNo){
 			$('#sosCloseBtn').click();
 			$('#mainPage').click();
 			$('#chatBtn').css('display','none');
+			console.log(data);
 			
 		});
 	}else{
