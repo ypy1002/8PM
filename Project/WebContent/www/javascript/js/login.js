@@ -64,32 +64,22 @@ function hangle(obj){
     return obj.replace(re, '');
 }
 
-//////////회원가입 공백불가!////////
-function trim(strSource)  {
-    var re = /^\s+|\s+$/g;
-    return strSource.replace(re, '');
-}
 
-/////////자음 모음 사용불가 확인!!!!!!!!/////
-function aaa(str){
-	//console.log(str);
-	var re = /[\ㄱ-ㅎㅏ-ㅣ]/g;
-	if (re.test(str)) {
-		return str.replace(re, '');
-	    //alert("한글이 아닙니다. (자음, 모음만 있는 한글은 처리하지 않습니다.)");
-	} 
-}
 ////////////////////////////signIn 특수문자불가!! 아이디, 이름////// 
-function inputCheckSpecial(str){
-	var strobj = str;
-	re = /[~!@\#$%^&*\()\=+_']/gi;
-	if(re.test(strobj)){
-		$('#signId').val($('#signId').val().replace(re,''));
-		$('#signName').val($('#signName').val().replace(re,''));
-	}
-	
-	
-}
+
+function clearForm() {
+	$('.has-success').removeClass('has-success').addClass('has-default');
+	$('.has-error').removeClass('has-error').addClass('has-default');
+	$('.has-warning').removeClass('has-warning').addClass('has-default');
+	$('label').html('').css('display', 'none');
+	$('.glyphicon-ok, #signEnd').css('display', 'none');
+	$('.glyphicon-asterisk').css({'display' : '','color' : 'black'});
+	$('.sex').css('background-color', 'white');
+	$('#signPhoneNumber').removeAttr('readonly');
+	$('#number').css('display', '').html('인증번호받기');
+	$('#signRecievedNumber, #complete').css('display', 'none');
+	$('#inputID, #inputPW, .checkInput, #signRecievedNumber').val('');
+};
 
 function labelToggle(){
 	$('label').css('display','none');
@@ -129,6 +119,21 @@ function statusEvent(target, labelHTML, status){
 
 
 function inputLengthCheck(target){
+	//여기서부터 이름값을 한번 검열해준다
+	var name = $('#signName').val();
+	for(var i=0; i<name.length; i++){
+		if(/[ㄱ-ㅎ|ㅏ-ㅣ]/.test(name) ){
+			$('#signNameDiv').removeClass('has-success','has-warning').addClass('has-error');
+			$('#signNameTypoSuccess').css('display', 'none');
+			$('#signNameTypo').css('color','#a94442').css('display', '');
+			$('#signNameLabel').html('자음 또는 모음만 쓸 수 없습니다').css('display', '');
+			return false;
+		}else{
+			$('#signNameDiv').removeClass('has-error').addClass('has-success');
+			$('#signNameLabel, #signNameTypo').css('display', 'none');
+			$('#signNameTypoSuccess').css('color','#3c763d').css('display', '');
+		}
+	}//이름 값 검열 종료
 	
 	labelToggle();
 	
@@ -177,18 +182,8 @@ function inputLengthCheck(target){
 			
 				}, function(data){
 					toast(data);
+					clearForm();				
 					$('#nextBtn').click();
-					$('.has-success').removeClass('has-success').addClass('has-default');
-					$('.has-error').removeClass('has-error').addClass('has-default');
-					$('.checkInput').val('');
-					$('label').html('').css('display','none');
-					$('.glyphicon-ok').css('display', 'none');
-					$('.glyphicon-asterisk').css('display', '').css('color','black');
-					$('.sex').css('background-color','white');
-					$('#signPhoneNumber').removeAttr('readonly');
-					$('#signEnd').css('display','none');
-					$('#number').css('display','').html('인증번호받기');
-					
 		 	    });
 		}else{
 			setTimeout('sendNumber();', 1000);
@@ -222,8 +217,14 @@ function checkLength(target){
 
 function checkId(target){
 	
-	if($('#' + target.id).val().length > 0 && $('#' + target.id).val().length < 6){
+	$('#' + target.id).val($('#' + target.id).val().replace(/\s*$/,'')); //공백제거
+	
+	$('#' + target.id).val($('#' + target.id).val().replace(/[~!@\#$%^&*\()\=+_"'`}{\-\]\[.|\/\\ㄱ-ㅎㅏ-ㅣ가-힣]/gi,''));
+	if($('#' + target.id).val().length > 0 && $('#' + target.id).val().length < 6 ){
 		statusEvent(target, 6 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
+		return false;
+	}else if(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test($('#' + target.id).val())){
+		statusEvent(target, '한글입력은 불가능합니다', "warning");
 		return false;
 	}else{
 		
@@ -231,6 +232,7 @@ function checkId(target){
 			id : $('#' + target.id).val(),
 			
 		}, function(data){
+			
 			
 			if(data == "ID사용가능"){
 				statusEvent(target, "", "success");
@@ -250,6 +252,8 @@ function checkId(target){
 }
 
 function checkPw(target){
+	$('#' + target.id).val($('#' + target.id).val().replace(/\s*$/,'')); //공백제거
+	
 	if($('#' + target.id).val().length > 0 && $('#' + target.id).val().length < 8){
 		statusEvent(target, 8 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
 		if($('#signPwConfirm').val().length > 0){
@@ -277,6 +281,8 @@ function checkPw(target){
 }
 
 function checkPwConfirm(target){
+	$('#' + target.id).val($('#' + target.id).val().replace(/\s*$/,'')); //공백제거
+	
 	if($('#' + target.id).val().length > 0 && $('#' + target.id).val().length < 8){
 		statusEvent(target, 8 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
 		return false;
@@ -292,7 +298,9 @@ function checkPwConfirm(target){
 }
 //////////////////////////////////////////////ㅁㄴㅇㄹ;ㅣ마너린ㅁ;럼ㄴㅇㄹ////
 function checkName(target){
-	$('#' + target.id).val($('#' + target.id).val().replace(/[a-z0-9]/gi,''));//영어,숫자입력시 
+	$('#' + target.id).val($('#' + target.id).val().replace(/\s*$/,'')); //공백제거
+	
+	$('#' + target.id).val($('#' + target.id).val().replace(/[~!@\#$%^&*\()\=+_"'`}{\-\]\[.|\/\\a-z0-9]/gi,''));//영어,숫자입력시 
 	
 	//console.log($('#' + target.id).val());
 	if($('#' + target.id).val().length < 2){
@@ -401,6 +409,9 @@ function checkDay(target){
 }
 
 function checkPhoneNumber(target){
+	$('#' + target.id).val($('#' + target.id).val().replace(/\s*$/,'')); //공백제거
+	
+	$('#' + target.id).val($('#' + target.id).val().replace(/[~!@\#$%^&*\()\=+_"'`}{\-\]\[.|\/\\a-zㄱ-ㅎㅏ-ㅣ가-힣]/gi,''));
 	if($('#' + target.id).val().length < 11){
 		statusEvent(target, 11 - $('#' + target.id).val().length + '자 더 입력해주세요.', "warning");
 		return false;
@@ -622,6 +633,7 @@ $(function() {
 				$('.pwFirstHidden').css('display','none');
 				$('.pwInput').val('').removeAttr('readonly');
 				$('#pwNumberBtn').html('인증번호 받기');
+				$('#prevBtn').click();
 			});
 		}
 	});
@@ -655,6 +667,10 @@ $(function() {
 				}
 			}
 		});
+	});
+	
+	$('#nextBtn, #prevBtn').click(function(){
+		clearForm();
 	});
 });
 
